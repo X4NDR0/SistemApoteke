@@ -1,397 +1,248 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Termin3DodatanZadatak1.Models;
 
-namespace Termin3DodatanZadatak1
+namespace Zadatak2SistemApoteke
 {
     class Program
     {
-        public static List<Klub> klbList = new List<Klub>();
-        public static List<Sudija> sdjList = new List<Sudija>();
-        public static List<Utakmica> ukmList = new List<Utakmica>();
-
+        public static List<Apotekar> listaApotekara = new List<Apotekar>();
+        public static List<Dobavljac> listaDobavljaca = new List<Dobavljac>();
         static void Main(string[] args)
         {
-            Meni opcije;
-
-
             LoadData();
-
-
+            Meni opcije;
             do
             {
-                do
-                {
-                    MeniTekst();
-                } while (Enum.TryParse(Console.ReadLine(), out opcije) == false);
+                MeniTekst();
+                Enum.TryParse(Console.ReadLine(), out opcije);
 
 
                 switch (opcije)
                 {
-                    case Meni.ispisiKlubove:
-                        IspisiKlubove();
-                        break;
-
-                    case Meni.dodajKlub:
-                        DodajKlub();
-                        break;
-
-                    case Meni.obrisiKlub:
-                        ObrisiKlub();
-                        break;
-
-                    case Meni.izmeniKlub:
-                        IzmeniKlub();
-                        break;
-
-                    case Meni.ispisiIgraceIzKluba:
-                        IspisIgracaIzKluba();
+                    case Meni.meniApotekara:
+                        Console.Clear();
+                        SistemApotekara();
                         break;
 
 
-                    case Meni.izmeniIgraceIzKluba:
-                        IzmeniIgraceIzKluba();
+                    case Meni.meniDobavljaca:
+                        Console.Clear();
+                        MeniDobavljaca();
                         break;
 
-
-                    case Meni.sudije:
-                        MeniSudije();
-                        break;
-
-                    case Meni.utakmice:
-                        Utakmice();
-                        break;
-
-                    case Meni.izlaz:
-                        Environment.Exit(0);
-                        break;
 
                     default:
-                        Console.WriteLine("Uneta opcija ne postoji!");
+                        Console.WriteLine("Nepoznat unos!");
                         break;
                 }
-
             } while (opcije != Meni.izlaz);
-
-            Console.ReadLine();
         }
-
-
 
         public static void MeniTekst()
         {
-            Console.WriteLine("1.Ispisi klubove");
-            Console.WriteLine("2.Dodaj klub");
-            Console.WriteLine("3.Obrisi klub");
-            Console.WriteLine("4.Izmeni klub");
-            Console.WriteLine("5.Ispisi igrace iz kluba");
-            Console.WriteLine("6.Izmeni igrace iz kluba");
-            Console.WriteLine("7.Meni za sudije");
-            Console.WriteLine("8.Utakmice");
+            Console.WriteLine("1.Meni apotekara");
+            Console.WriteLine("2.Meni dobavljaca");
             Console.WriteLine("0.Izlaz");
             Console.Write("Unos:");
         }
+        //Metode za apotekara
+        public static void IspisiSveApotekare()
+        {
+            foreach (Apotekar apotekar in listaApotekara)
+            {
+                Console.WriteLine(apotekar.IdentifikacioniBroj + " " + apotekar.Ime + " " + apotekar.Prezime + " {0:0#########} ", apotekar.BrojTelefona);
+            }
+        }
 
-        public static void IspisiKlubove()
+        public static void IzmeniApotekara()
         {
             Console.Clear();
-            foreach (Klub klub in klbList)
+
+            int sifraApotekaraZaIzmenu;
+
+            //Promenljive za izmenu
+            int novaSifraApotekara;
+            string novoImeApotekara;
+            string novoPrezimeApotekara;
+            int noviBrojTelefonaApotekara;
+
+            Console.Write("Unesite sifru apotekara za izmenu:");
+            sifraApotekaraZaIzmenu = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Unesite novu sifru apotekara:");
+            novaSifraApotekara = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Unesite novo ime apotekara:");
+            novoImeApotekara = Console.ReadLine();
+
+            Console.Write("Unesite novo prezime apotekara:");
+            novoPrezimeApotekara = Console.ReadLine();
+
+            Console.Write("Unesite novi broj telefona apotekara:");
+            noviBrojTelefonaApotekara = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < listaApotekara.Count; i++)
             {
-                Console.WriteLine(klub.sifraKluba + " " + klub.nazivKluba);
+                if (listaApotekara[i].IdentifikacioniBroj == sifraApotekaraZaIzmenu)
+                {
+                    Apotekar apotekarIzmena = new Apotekar { IdentifikacioniBroj = novaSifraApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara, BrojTelefona = noviBrojTelefonaApotekara };
+                    listaApotekara[i] = apotekarIzmena;
+                }
             }
         }
 
 
-        public static void SudijeTekst()
-        {
-            Console.WriteLine("1.Ispisi sve sudije!");
-            Console.WriteLine("2.Izmeni sudije");
-            Console.WriteLine("3.Obrisi sudije");
-            Console.Write("Unos:");
-        }
-
-        public static void DodajKlub()
+        public static void ObrisiApotekara()
         {
             Console.Clear();
-            int sifraKluba = 0;
-            string nazivKluba;
+            int sifraApotekaraZaBrisanje;
 
-            Console.Write("Unesite sifru kluba:");
-            sifraKluba = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Unesite sifru apotekara kojeg zelite da obrisete:");
+            sifraApotekaraZaBrisanje = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Unesite naziv kluba:");
-            nazivKluba = Console.ReadLine();
-
-
-            int doMeni = 1;
-            do
+            for (int i = 0; i < listaApotekara.Count; i++)
             {
-                int sifraIgracaAdd;
-                string imeIgracaAdd;
-                string prezimeIgracaAdd;
-
-                Console.WriteLine("Sada mozete unosite igrace u klub,a kada zavrsite upise 0");
-
-                Console.Write("Unesite sifru igraca:");
-                sifraIgracaAdd = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Unesite ime igraca:");
-                imeIgracaAdd = Console.ReadLine();
-                Console.Write("Unesite prezime igraca:");
-                prezimeIgracaAdd = Console.ReadLine();
-
-
-                Igrac igrTempAdd = new Igrac { SifraIgraca = sifraIgracaAdd, ImeIgraca = imeIgracaAdd, PrezimeIgraca = prezimeIgracaAdd };
-
-                Klub addKlub = new Klub();
-                addKlub.sifraKluba = sifraKluba;
-                addKlub.nazivKluba = nazivKluba;
-                addKlub.igrList.Add(igrTempAdd);
-                klbList.Add(addKlub);
-
-                Console.Write("Upisite 0 ukoliko ste zavrsili dodavanje,a 1 da nastavite:");
-                doMeni = Convert.ToInt32(Console.ReadLine());
-
-            } while (doMeni != 0);
-
-
-
-            Console.WriteLine("Uspesno ste dodali klub!");
+                if (listaApotekara[i].IdentifikacioniBroj == sifraApotekaraZaBrisanje)
+                {
+                    listaApotekara.RemoveAt(i);
+                }
+            }
         }
+
+        public static void DodajApotekara()
+        {
+
+        }
+
+
+        public static void SistemApotekara()
+        {
+            int izabir;
+
+            Console.Clear();
+            Console.WriteLine("1.Ispisi sve apotekare");
+            Console.WriteLine("2.Izmeni odredjenog apotekara");
+            Console.WriteLine("3.Obrisi odredjenog apotekara");
+            Console.WriteLine("4.Dodaj apotekara");
+            Console.Write("Unos:");
+
+            izabir = Convert.ToInt32(Console.ReadLine());
+
+            switch (izabir)
+            {
+                case 1:
+                    IspisiSveApotekare();
+                    break;
+
+
+                case 2:
+                    IzmeniApotekara();
+                    break;
+
+
+                case 3:
+                    ObrisiApotekara();
+                    break;
+
+                case 4:
+                    DodajApotekara();
+                    break;
+
+
+                default:
+                    Console.WriteLine("Nepoznat unos!");
+                    break;
+            }
+        }
+        //Kraj metoda apotekara
 
 
         public static void LoadData()
         {
-            Klub klb1 = new Klub { sifraKluba = 63624, nazivKluba = "Zvezda" };
-            Igrac igr1 = new Igrac { SifraIgraca = 19, ImeIgraca = "Bogdan", PrezimeIgraca = "Bogdanovic" };
-            klb1.igrList.Add(igr1);
+            Apotekar apotekar1 = new Apotekar { IdentifikacioniBroj = 5535, Ime = "Zoran", Prezime = "Nikolic", BrojTelefona = 0643876352 };
+            Apotekar apotekar2 = new Apotekar { IdentifikacioniBroj = 8473, Ime = "Stefan", Prezime = "Petrovic", BrojTelefona = 0625358261 };
 
+            //Dodavanje Apotekara u listu
+            listaApotekara.Add(apotekar1);
+            listaApotekara.Add(apotekar2);
 
-            Klub klb2 = new Klub { sifraKluba = 33212, nazivKluba = "Partizan" };
-            Igrac igr2 = new Igrac { SifraIgraca = 42, ImeIgraca = "Marjan", PrezimeIgraca = "Marjanovic" };
-            klb2.igrList.Add(igr2);
+            Dobavljac dobavljac1 = new Dobavljac { IdentifikacioniBroj = 1283, Ime = "Marko", Prezime = "Markovic", Adresa = "Ulica 54", Mesto = "Kragujevac", BrojTelefona = 0602271954 };
+            Dobavljac dobavljac2 = new Dobavljac { IdentifikacioniBroj = 7261, Ime = "Darko", Prezime = "Dugic", Adresa = "Ulica 32", Mesto = "Subotica", BrojTelefona = 0648272824 };
 
-
-            Sudija sudj1 = new Sudija { SifraSudije = 5462, ImeSudije = "Boban", PrezimeSudije = "Jovanovic" };
-            Sudija sudj2 = new Sudija { SifraSudije = 7487, ImeSudije = "Djordje", PrezimeSudije = "Simic" };
-
-            Utakmica utkm1 = new Utakmica { SifraUtakmice = 5735, VremeUtakcime = new DateTime(2019, 5, 10, 19, 38, 40), BrojKosevaGostiju = 5, BrojKosevaDomacina = 25, sdj = sudj1 };
-            Utakmica utkm2 = new Utakmica { SifraUtakmice = 3337, VremeUtakcime = new DateTime(2019, 1, 1, 12, 55, 00), BrojKosevaGostiju = 60, BrojKosevaDomacina = 10, sdj = sudj2 };
-
-            //Dodavanje utakmica
-            ukmList.Add(utkm1);
-            ukmList.Add(utkm2);
-
-            //Dodovanje klubova i igraca
-            klbList.Add(klb1);
-            klbList.Add(klb2);
-
-            //Dodavanje sudija
-            sdjList.Add(sudj1);
-            sdjList.Add(sudj2);
+            //Dodavanje dobavljaca u listu
+            listaDobavljaca.Add(dobavljac1);
+            listaDobavljaca.Add(dobavljac2);
         }
 
-        public static void Utakmice()
+        public static void MeniDobavljaca()
         {
+            int izabir;
+
             Console.Clear();
-
-            int izabirMeniUtakmice;
-
-            Console.WriteLine("1.Prikazi sve utakmice");
-            Console.WriteLine("2.Prikazi pomocu sifre utakmice");
+            Console.WriteLine("1.Ispisi sve dobavljace");
+            Console.WriteLine("2.Izmeni odredjenog dobavljaca");
+            Console.WriteLine("3.Obrisi odredjenog dobavljaca");
             Console.Write("Unos:");
 
-            izabirMeniUtakmice = Convert.ToInt32(Console.ReadLine());
+            izabir = Convert.ToInt32(Console.ReadLine());
 
-            switch (izabirMeniUtakmice)
+            switch (izabir)
             {
                 case 1:
                     Console.Clear();
-                    foreach (Utakmica ukmList in ukmList)
+                    foreach (Dobavljac dobavljac in listaDobavljaca)
                     {
-                        Console.Write("Sifra utakmice:" + ukmList.SifraUtakmice + "\n" + "Vreme utakmice:" + ukmList.VremeUtakcime + "\n" + "Broj koseva gostiju:" + ukmList.BrojKosevaGostiju + "\n" + "Broj koseva domacina:" + ukmList.BrojKosevaDomacina + "\n" + "Sudija:" + ukmList.sdj.ImeSudije + " " + ukmList.sdj.PrezimeSudije + "\n");
+                        Console.WriteLine(dobavljac.IdentifikacioniBroj + " " + dobavljac.Ime + " " + dobavljac.Prezime + " " + dobavljac.Adresa + " " + dobavljac.Adresa + " {0:0#########}", dobavljac.BrojTelefona);
                     }
                     break;
+
 
                 case 2:
                     Console.Clear();
 
-                    int sifraUtakmiceSelektovanje;
-                    Console.Write("Unesite sifru utakmice koju zelite da ispisite:");
-                    sifraUtakmiceSelektovanje = Convert.ToInt32(Console.ReadLine());
+                    //Promenjive za izmenu
+                    int novaSifraDobavljaca;
+                    string novoImeDobavljaca;
+                    string novoPrezimeDobavljaca;
+                    string novaAdresaDobavljaca;
+                    string novoMestoDobavljaca;
+                    int noviBrojTelefonDobavljaca;
 
-                    foreach (Utakmica ukmList in ukmList)
-                    {
-                        if (sifraUtakmiceSelektovanje == ukmList.SifraUtakmice)
-                        {
-                            Console.Write("Sifra utakmice:" + ukmList.SifraUtakmice + "\n" + "Vreme utakmice:" + ukmList.VremeUtakcime + "\n" + "Broj koseva gostiju:" + ukmList.BrojKosevaGostiju + "\n" + "Broj koseva domacina:" + ukmList.BrojKosevaDomacina + "\n" + "Sudija:" + ukmList.sdj.ImeSudije + " " + ukmList.sdj.PrezimeSudije + "\n");
-                        }
-                    }
+                    int izabirDobavljacaZaIzmenu;
+                    Console.Write("Unesite sifru dobavljaca kojeg zelite da izmenite:");
+                    izabirDobavljacaZaIzmenu = Convert.ToInt32(Console.ReadLine());
+
+                    Console.Write("Unesite novu sifru dobavljaca:");
+                    novaSifraDobavljaca = Convert.ToInt32(Console.ReadLine());
+
+                    Console.Write("Unesite novo ime dobavljaca");
+                    novoImeDobavljaca = Console.ReadLine();
+
+                    Console.Write("Unesite novo prezime dobavljaca");
+                    novoPrezimeDobavljaca = Console.ReadLine();
+
+                    Console.Write("Unesite novu adresu dobavljaca");
+                    novaAdresaDobavljaca = Console.ReadLine();
+
+                    Console.Write("Unesite novo mesto dobavljaca");
+                    novoMestoDobavljaca = Console.ReadLine();
+
+                    Console.Write("Unesite novi broj telefona dobavljaca");
+                    noviBrojTelefonDobavljaca = Convert.ToInt32(Console.ReadLine());
+
                     break;
 
-                default:
-                    break;
-
-            }
-        }
-
-        public static void ObrisiKlub()
-        {
-            Console.Clear();
-            int sifraKlubaBrisanje;
-            Console.Write("Unesite sifru kluba:");
-            sifraKlubaBrisanje = Convert.ToInt32(Console.ReadLine());
-        }
-
-
-        public static void IzmeniKlub()
-        {
-            Console.Clear();
-
-            int sifraIzmena;
-            int sifraIzmena2;
-            string imeIzmena;
-
-            Console.Write("Unesite sifru kluba koji zelite da izmenite:");
-            sifraIzmena = Convert.ToInt32(Console.ReadLine());
-
-            Console.Write("Unesite novu sifru kluba:");
-            sifraIzmena2 = Convert.ToInt32(Console.ReadLine());
-
-            Console.Write("Unesite novo ime kluba:");
-            imeIzmena = Console.ReadLine();
-
-            foreach (Klub klbList in klbList)
-            {
-                if (klbList.sifraKluba == sifraIzmena)
-                {
-                    klbList.sifraKluba = sifraIzmena2;
-                    klbList.nazivKluba = imeIzmena;
-                }
-            }
-        }
-
-        public static void IspisIgracaIzKluba()
-        {
-            Console.Clear();
-
-            int sifraIspis;
-
-            Console.WriteLine("Unesite sifru kluba u kojem zelite da ispisite igrace");
-            Console.Write("Sifra:");
-
-            sifraIspis = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Igraci:");
-
-
-            foreach (Klub klub in klbList)
-            {
-                if (klub.sifraKluba == sifraIspis)
-                {
-                    foreach (Igrac igrac in klub.igrList)
-                    {
-
-                        Console.WriteLine(igrac.SifraIgraca + " " + igrac.ImeIgraca + " " + igrac.PrezimeIgraca);
-                    }
-                }
-            }
-        }
-
-        public static void IzmeniIgraceIzKluba()
-        {
-            Console.Clear();
-            int sifraIgracaIzmena;
-            int sifraKlubaIzmena;
-
-            Console.Write("Unesite sifru kluba kojem zelite da izmenite igrace:");
-            sifraKlubaIzmena = Convert.ToInt32(Console.ReadLine());
-
-            Console.Write("Sada unesite sifru igraca:");
-            sifraIgracaIzmena = Convert.ToInt32(Console.ReadLine());
-
-
-            int novaSifraIgraca;
-            string novoImeIgraca;
-            string novoPrezimeIgraca;
-
-            for (int i = 0; i < klbList.Count; i++)
-            {
-                if (sifraKlubaIzmena == klbList[i].sifraKluba)
-                {
-                    for (int j = 0; j < klbList[i].igrList.Count; j++)
-                    {
-                        if (klbList[i].igrList[j].SifraIgraca == sifraIgracaIzmena)
-                        {
-                            Console.Write("Unesite novu sifru igraca:");
-                            novaSifraIgraca = Convert.ToInt32(Console.ReadLine());
-                            Console.Write("Unesite novo ime igraca:");
-                            novoImeIgraca = Console.ReadLine();
-                            Console.Write("Unesite novo prezime igraca:");
-                            novoPrezimeIgraca = Console.ReadLine();
-
-                            Igrac igrEdit = new Igrac { SifraIgraca = novaSifraIgraca, ImeIgraca = novoImeIgraca, PrezimeIgraca = novoPrezimeIgraca };
-
-                            klbList[i].igrList[j] = igrEdit;
-                        }
-                    }
-                }
-            }
-        }
-
-        public static void MeniSudije()
-        {
-            Console.Clear();
-            SudijeTekst();
-            int sudijeMeni;
-            sudijeMeni = Convert.ToInt32(Console.ReadLine());
-
-            switch (sudijeMeni)
-            {
-                case 1:
-                    foreach (Sudija sdjList in sdjList)
-                    {
-                        Console.WriteLine("Sifra:" + sdjList.SifraSudije + " Ime:" + sdjList.ImeSudije + " Prezime:" + sdjList.PrezimeSudije);
-
-                    }
-                    break;
-
-                case 2:
-                    int editSifraSudije;
-                    string novoImeSudije;
-                    string novoPrezimeSudije;
-
-                    Console.Write("Unesite sifru sudije:");
-                    editSifraSudije = Convert.ToInt32(Console.ReadLine());
-
-                    Console.Write("Unesite novo ime sudije:");
-                    novoImeSudije = Console.ReadLine();
-
-                    Console.Write("Unesite novo prezime sudije:");
-                    novoPrezimeSudije = Console.ReadLine();
-
-                    foreach (Sudija sdjList in sdjList)
-                    {
-                        if (editSifraSudije == sdjList.SifraSudije)
-                        {
-                            sdjList.ImeSudije = novoImeSudije;
-                            sdjList.PrezimeSudije = novoPrezimeSudije;
-                        }
-                    }
-                    break;
 
                 case 3:
-                    int sifraSudijeDelete;
+                    Console.Clear();
+                    int izabirDobavljacaZaBrisanje;
 
-                    Console.Write("Unesite sifru sudije kojeg zelite da obrisite:");
-                    sifraSudijeDelete = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Unesite sifru dobavljaca kojeg zelite da obrisete:");
+                    izabirDobavljacaZaBrisanje = Convert.ToInt32(Console.ReadLine());
 
-                    for (int i = 0; i < sdjList.Count; i++)
+                    for (int i = 0; i < listaDobavljaca.Count; i++)
                     {
-                        if (sifraSudijeDelete == sdjList[i].SifraSudije)
-                        {
-                            sdjList.RemoveAt(i);
-                        }
+                        listaDobavljaca.RemoveAt(i);
                     }
 
                     break;
@@ -399,6 +250,7 @@ namespace Termin3DodatanZadatak1
 
 
                 default:
+                    Console.WriteLine("Nepoznat unos!");
                     break;
             }
 
@@ -407,16 +259,11 @@ namespace Termin3DodatanZadatak1
 
         public enum Meni
         {
-            ispisiKlubove = 1,
-            dodajKlub = 2,
-            obrisiKlub = 3,
-            izmeniKlub = 4,
-            ispisiIgraceIzKluba = 5,
-            izmeniIgraceIzKluba = 6,
-            sudije = 7,
-            utakmice = 8,
+            meniApotekara = 1,
+            meniDobavljaca = 2,
             izlaz = 0
-        };
+        }
+
 
     }
 }
