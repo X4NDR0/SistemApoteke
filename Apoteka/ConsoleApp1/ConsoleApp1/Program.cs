@@ -48,6 +48,7 @@ namespace Zadatak2SistemApoteke
         //Metode za apotekara
         public static void IspisiSveApotekare()
         {
+            Console.Clear();
             foreach (Apotekar apotekar in listaApotekara)
             {
                 Console.WriteLine(apotekar.IdentifikacioniBroj + " " + apotekar.Ime + " " + apotekar.Prezime + " {0:0#########} ", apotekar.BrojTelefona);
@@ -111,7 +112,27 @@ namespace Zadatak2SistemApoteke
 
         public static void DodajApotekara()
         {
+            Console.Clear();
+            int noviIdApotekara;
+            string novoImeApotekara;
+            string novoPrezimeApotekara;
+            int noviBrojTelefonaApotekara;
 
+            Console.Write("Unesite id apotekara:");
+            noviIdApotekara = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Unesite ime apotekara:");
+            novoImeApotekara = Console.ReadLine();
+
+            Console.Write("Unesite prezime apotekara:");
+            novoPrezimeApotekara = Console.ReadLine();
+
+            Console.Write("Unesite broj telefona apotekara:");
+            noviBrojTelefonaApotekara = Convert.ToInt32(Console.ReadLine());
+
+            Apotekar apotekarKreiranje = new Apotekar { IdentifikacioniBroj = noviIdApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara,BrojTelefona = noviBrojTelefonaApotekara};
+
+            listaApotekara.Add(apotekarKreiranje);
         }
 
 
@@ -174,6 +195,65 @@ namespace Zadatak2SistemApoteke
             listaDobavljaca.Add(dobavljac2);
         }
 
+        //Metode dobavljaca
+        public static void IspisiSveDobavljace()
+        {
+            Console.Clear();
+            foreach (Dobavljac dobavljac in listaDobavljaca)
+            {
+                Console.WriteLine(dobavljac.IdentifikacioniBroj + " " + dobavljac.Ime + " " + dobavljac.Prezime + " " + dobavljac.Adresa + " " + dobavljac.Adresa + " {0:0#########}", dobavljac.BrojTelefona);
+            }
+        }
+
+        public static void IzmeniOdredjenogDobavljaca()
+        {
+            Console.Clear();
+            //Promenjive za izmenu
+            int novaSifraDobavljaca;
+            string novoImeDobavljaca;
+            string novoPrezimeDobavljaca;
+            string novaAdresaDobavljaca;
+            string novoMestoDobavljaca;
+            int noviBrojTelefonDobavljaca;
+
+            int izabirDobavljacaZaIzmenu;
+            Console.Write("Unesite sifru dobavljaca kojeg zelite da izmenite:");
+            izabirDobavljacaZaIzmenu = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Unesite novu sifru dobavljaca:");
+            novaSifraDobavljaca = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Unesite novo ime dobavljaca");
+            novoImeDobavljaca = Console.ReadLine();
+
+            Console.Write("Unesite novo prezime dobavljaca");
+            novoPrezimeDobavljaca = Console.ReadLine();
+
+            Console.Write("Unesite novu adresu dobavljaca");
+            novaAdresaDobavljaca = Console.ReadLine();
+
+            Console.Write("Unesite novo mesto dobavljaca");
+            novoMestoDobavljaca = Console.ReadLine();
+
+            Console.Write("Unesite novi broj telefona dobavljaca");
+            noviBrojTelefonDobavljaca = Convert.ToInt32(Console.ReadLine());
+        }
+
+        public static void ObrisiDobavljaca()
+        {
+            Console.Clear();
+            int izabirDobavljacaZaBrisanje;
+
+            Console.Write("Unesite sifru dobavljaca kojeg zelite da obrisete:");
+            izabirDobavljacaZaBrisanje = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < listaDobavljaca.Count; i++)
+            {
+                listaDobavljaca.RemoveAt(i);
+            }
+        }
+        //Kraj metoda dobavljaca
+
         public static void MeniDobavljaca()
         {
             int izabir;
@@ -182,6 +262,7 @@ namespace Zadatak2SistemApoteke
             Console.WriteLine("1.Ispisi sve dobavljace");
             Console.WriteLine("2.Izmeni odredjenog dobavljaca");
             Console.WriteLine("3.Obrisi odredjenog dobavljaca");
+            Console.WriteLine("4.Dodaj dobavljaca");
             Console.Write("Unos:");
 
             izabir = Convert.ToInt32(Console.ReadLine());
@@ -189,62 +270,17 @@ namespace Zadatak2SistemApoteke
             switch (izabir)
             {
                 case 1:
-                    Console.Clear();
-                    foreach (Dobavljac dobavljac in listaDobavljaca)
-                    {
-                        Console.WriteLine(dobavljac.IdentifikacioniBroj + " " + dobavljac.Ime + " " + dobavljac.Prezime + " " + dobavljac.Adresa + " " + dobavljac.Adresa + " {0:0#########}", dobavljac.BrojTelefona);
-                    }
+                    IspisiSveDobavljace();
                     break;
 
 
                 case 2:
-                    Console.Clear();
-
-                    //Promenjive za izmenu
-                    int novaSifraDobavljaca;
-                    string novoImeDobavljaca;
-                    string novoPrezimeDobavljaca;
-                    string novaAdresaDobavljaca;
-                    string novoMestoDobavljaca;
-                    int noviBrojTelefonDobavljaca;
-
-                    int izabirDobavljacaZaIzmenu;
-                    Console.Write("Unesite sifru dobavljaca kojeg zelite da izmenite:");
-                    izabirDobavljacaZaIzmenu = Convert.ToInt32(Console.ReadLine());
-
-                    Console.Write("Unesite novu sifru dobavljaca:");
-                    novaSifraDobavljaca = Convert.ToInt32(Console.ReadLine());
-
-                    Console.Write("Unesite novo ime dobavljaca");
-                    novoImeDobavljaca = Console.ReadLine();
-
-                    Console.Write("Unesite novo prezime dobavljaca");
-                    novoPrezimeDobavljaca = Console.ReadLine();
-
-                    Console.Write("Unesite novu adresu dobavljaca");
-                    novaAdresaDobavljaca = Console.ReadLine();
-
-                    Console.Write("Unesite novo mesto dobavljaca");
-                    novoMestoDobavljaca = Console.ReadLine();
-
-                    Console.Write("Unesite novi broj telefona dobavljaca");
-                    noviBrojTelefonDobavljaca = Convert.ToInt32(Console.ReadLine());
-
+                    IzmeniOdredjenogDobavljaca();
                     break;
 
 
                 case 3:
-                    Console.Clear();
-                    int izabirDobavljacaZaBrisanje;
-
-                    Console.Write("Unesite sifru dobavljaca kojeg zelite da obrisete:");
-                    izabirDobavljacaZaBrisanje = Convert.ToInt32(Console.ReadLine());
-
-                    for (int i = 0; i < listaDobavljaca.Count; i++)
-                    {
-                        listaDobavljaca.RemoveAt(i);
-                    }
-
+                    ObrisiDobavljaca();
                     break;
 
 
