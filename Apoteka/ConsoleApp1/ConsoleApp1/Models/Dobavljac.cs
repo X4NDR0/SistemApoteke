@@ -1,4 +1,5 @@
-﻿namespace Zadatak2SistemApoteke
+﻿using ConsoleApp1.Services;
+namespace Zadatak2SistemApoteke
 {
     public class Dobavljac
     {
