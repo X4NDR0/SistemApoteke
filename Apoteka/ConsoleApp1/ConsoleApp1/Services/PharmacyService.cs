@@ -21,7 +21,6 @@ namespace ConsoleApp1.Services
                 MeniTekst();
                 Enum.TryParse(Console.ReadLine(), out opcije);
 
-
                 switch (opcije)
                 {
                     case Meni.meniApotekara:
@@ -55,7 +54,7 @@ namespace ConsoleApp1.Services
             int izabirMeni;
             Console.WriteLine("1.Ispisi sve narudzbine");
             Console.WriteLine("2.Obrisi narudzbinu");
-            Console.WriteLine("3.4.Kreiraj narudzbinu");
+            Console.WriteLine("3.Kreiraj narudzbinu");
             Console.Write("Unos:");
 
             izabirMeni = Convert.ToInt32(Console.ReadLine());
@@ -76,7 +75,6 @@ namespace ConsoleApp1.Services
                     Console.Clear();
                     KreirajNarudzbenicu();
                     break;
-
 
                 default:
                     Console.WriteLine("Nepoznat unos!");
@@ -100,7 +98,6 @@ namespace ConsoleApp1.Services
             }
         }
 
-
         public void MeniTekst()
         {
             Console.WriteLine("1.Meni apotekara");
@@ -110,7 +107,6 @@ namespace ConsoleApp1.Services
             Console.WriteLine("0.Izlaz");
             Console.Write("Unos:");
         }
-
 
         public void IspisiSveNarudzbine()
         {
@@ -123,7 +119,6 @@ namespace ConsoleApp1.Services
                 }
             }
         }
-
 
         //Metode za apotekara
         public void IspisiSveApotekare()
@@ -158,7 +153,6 @@ namespace ConsoleApp1.Services
                 }
             }
         }
-
 
         public void ObrisiLek()
         {
@@ -200,7 +194,6 @@ namespace ConsoleApp1.Services
                     listaLekova[i] = lekEdit;
                 }
             }
-
         }
 
         public void DodajLek()
@@ -257,7 +250,6 @@ namespace ConsoleApp1.Services
                 }
             }
         }
-
 
         public void ObrisiApotekara()
         {
@@ -328,8 +320,6 @@ namespace ConsoleApp1.Services
             listaLekova.Add(lek3);
         }
 
-
-
         public void SistemApotekara()
         {
             int izabir;
@@ -349,11 +339,9 @@ namespace ConsoleApp1.Services
                     IspisiSveApotekare();
                     break;
 
-
                 case 2:
                     IzmeniApotekara();
                     break;
-
 
                 case 3:
                     ObrisiApotekara();
@@ -362,7 +350,6 @@ namespace ConsoleApp1.Services
                 case 4:
                     DodajApotekara();
                     break;
-
 
                 default:
                     Console.WriteLine("Nepoznat unos!");
@@ -429,10 +416,7 @@ namespace ConsoleApp1.Services
                     listaNarudzbenica.Add(narudzbenicaKreiraj);
                 }
             }
-
-
         }
-
 
         //Metode dobavljaca
         public void IspisiSveDobavljace()
@@ -443,7 +427,6 @@ namespace ConsoleApp1.Services
                 Console.WriteLine(dobavljac.IdentifikacioniBroj + " " + dobavljac.Ime + " " + dobavljac.Prezime + " " + dobavljac.Adresa + " " + dobavljac.Mesto + " {0:0#########}", dobavljac.BrojTelefona);
             }
         }
-
 
         public void IzmeniOdredjenogDobavljaca()
         {
