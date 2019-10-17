@@ -5,5 +5,6 @@ namespace Zadatak2SistemApoteke
     {
         public int SifraLeka;
         public string NazivLeka;
+        public double Cena;
     }
 }

@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Services;
+﻿using System.Collections.Generic;
+
 namespace Zadatak2SistemApoteke
 {
     public class Dobavljac
@@ -9,5 +10,11 @@ namespace Zadatak2SistemApoteke
         public string Adresa;
         public string Mesto;
         public int BrojTelefona;
+        public List<Lek> ListaLekova;
+        public Dobavljac()
+        {
+            ListaLekova = new List<Lek>();
+        }
+
     }
 }
