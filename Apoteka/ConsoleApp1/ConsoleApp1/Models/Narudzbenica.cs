@@ -6,14 +6,15 @@ namespace ConsoleApp1.Models
 {
     class Narudzbenica
     {
+        public int SifraNarudzbine;
         public DateTime Vreme;
         public Apotekar Apotekar;
-        public List<NabavkaLeka> ListaLekova;
+        public List<NabavkaLeka> ListaNabavke;
 
         public Narudzbenica()
         {
             Apotekar = new Apotekar();
-            ListaLekova = new List<NabavkaLeka>();
+            ListaNabavke = new List<NabavkaLeka>();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace ConsoleApp1.Services
         public static List<Dobavljac> listaDobavljaca = new List<Dobavljac>();
         public static List<Lek> listaLekova = new List<Lek>();
         public static List<NabavkaLeka> listaNabavkeLeka = new List<NabavkaLeka>();
+        public static List<Narudzbenica> listaNarudzbenica = new List<Narudzbenica>();
         public void Initialize()
         {
             LoadData();
@@ -38,26 +39,89 @@ namespace ConsoleApp1.Services
                         MeniLekova();
                         break;
 
-                    case Meni.narudzbenica:
+                    case Meni.meniNarudzbina:
                         Console.Clear();
-                        KreirajNarudzbenicu();
+                        MeniNarudzbina();
                         break;
 
                     default:
-                        Console.WriteLine("Nepoznat unos!");
                         break;
                 }
             } while (opcije != Meni.izlaz);
         }
+
+        public void MeniNarudzbina()
+        {
+            int izabirMeni;
+            Console.WriteLine("1.Ispisi sve narudzbine");
+            Console.WriteLine("2.Obrisi narudzbinu");
+            Console.WriteLine("3.4.Kreiraj narudzbinu");
+            Console.Write("Unos:");
+
+            izabirMeni = Convert.ToInt32(Console.ReadLine());
+
+            switch (izabirMeni)
+            {
+                case 1:
+                    Console.Clear();
+                    IspisiSveNarudzbine();
+                    break;
+
+                case 2:
+                    Console.Clear();
+                    ObrisiNarudzbenicu();
+                    break;
+
+                case 3:
+                    Console.Clear();
+                    KreirajNarudzbenicu();
+                    break;
+
+
+                default:
+                    Console.WriteLine("Nepoznat unos!");
+                    break;
+            }
+        }
+
+        public void ObrisiNarudzbenicu()
+        {
+            int brisanjeSelect;
+
+            Console.Write("Unesite sifru narudzbine koju zelite da obrisete!");
+            brisanjeSelect = Convert.ToInt32(Console.ReadLine());
+
+            foreach (Narudzbenica narudzbenica in listaNarudzbenica)
+            {
+                if (narudzbenica.SifraNarudzbine == brisanjeSelect)
+                {
+                    listaNarudzbenica.Remove(narudzbenica);
+                }
+            }
+        }
+
 
         public void MeniTekst()
         {
             Console.WriteLine("1.Meni apotekara");
             Console.WriteLine("2.Meni dobavljaca");
             Console.WriteLine("3.Meni lekova");
-            Console.WriteLine("4.Kreiraj narudzbenicu");
+            Console.WriteLine("4.Meni narudzbenica");
             Console.WriteLine("0.Izlaz");
             Console.Write("Unos:");
+        }
+
+
+        public void IspisiSveNarudzbine()
+        {
+            for (int i = 0; i < listaNarudzbenica.Count; i++)
+            {
+                Console.WriteLine("Apotekar:" + listaNarudzbenica[i].Apotekar.Ime + " " + listaNarudzbenica[i].Apotekar.Prezime + "\n" + "Vreme:" + listaNarudzbenica[i].Vreme);
+                for (int j = 0; j < listaNarudzbenica[i].ListaNabavke.Count; j++)
+                {
+                    Console.WriteLine(listaNarudzbenica[i].ListaNabavke[j].Naziv + " " + listaNarudzbenica[i].ListaNabavke[j].Kolicina);
+                }
+            }
         }
 
 
@@ -75,7 +139,7 @@ namespace ConsoleApp1.Services
         {
             foreach (Lek lek in listaLekova)
             {
-                Console.WriteLine(lek.SifraLeka + " " + lek.NazivLeka);
+                Console.WriteLine(lek.SifraLeka + " " + lek.NazivLeka + " Cena:" + lek.Cena);
             }
         }
 
@@ -262,12 +326,6 @@ namespace ConsoleApp1.Services
             listaLekova.Add(lek1);
             listaLekova.Add(lek2);
             listaLekova.Add(lek3);
-
-            dobavljac1.ListaLekova.Add(lek1);
-            dobavljac1.ListaLekova.Add(lek2);
-
-            dobavljac2.ListaLekova.Add(lek1);
-            dobavljac2.ListaLekova.Add(lek3);
         }
 
 
@@ -315,13 +373,35 @@ namespace ConsoleApp1.Services
 
         public void KreirajNarudzbenicu()
         {
-            int sifraDobavljaca;
-
             Dobavljac dobavljacKreiranje = new Dobavljac();
+            Apotekar apotekarKreiraj = new Apotekar();
+
+            //Promenljive
+            int sifraDobavljaca;
+            int sifraLeka;
+            int sifraApotekara;
+            double ukupnaCena = 0;
+            int kolicinaLeka;
+            int sifraNarudzbine;
+
+            Console.Write("Unesite sifru narudzbine:");
+            sifraNarudzbine = Convert.ToInt32(Console.ReadLine());
+
+            IspisiSveApotekare();
+            Console.Write("Unesite sifru apotekara koji vrsi narudzbenicu:");
+            sifraApotekara = Convert.ToInt32(Console.ReadLine());
+
+            foreach (Apotekar apotekar in listaApotekara)
+            {
+                if (apotekar.IdentifikacioniBroj == sifraApotekara)
+                {
+                    apotekarKreiraj = apotekar;
+                }
+            }
 
             IspisiSveDobavljace();
 
-            Console.Write("Unesite sifru dobavljaca od kojeg zelite da porucite lekove:");
+            Console.Write("Unesite sifru dobavljaca:");
             sifraDobavljaca = Convert.ToInt32(Console.ReadLine());
 
             foreach (Dobavljac dobavljac in listaDobavljaca)
@@ -332,44 +412,23 @@ namespace ConsoleApp1.Services
                 }
             }
 
-            int kolicinaLeka;
-            int sifraLeka;
-            int nastavakUnos;
-            double ukupnaCena = 0;
+            IspisiSveLekove();
+            Console.Write("Unesite sifru leka:");
+            sifraLeka = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Sada unesite sifru leka koji zelite da porucite:");
-            do
+            foreach (Lek lek in listaLekova)
             {
-                IspisiSveLekove();
-                Console.Write("Unos:");
-                sifraLeka = Convert.ToInt32(Console.ReadLine());
-
-                foreach (Lek lek in listaLekova)
+                if (lek.SifraLeka == sifraLeka)
                 {
-                    if (lek.SifraLeka == sifraLeka)
-                    {
-                        Console.WriteLine("Obavestenje:Cena ovog leka je:" + lek.Cena);
-                        Console.Write("Unesite kolicinu leka:");
-                        kolicinaLeka = Convert.ToInt32(Console.ReadLine());
-                        ukupnaCena += lek.Cena * kolicinaLeka;
-                        NabavkaLeka nabavkaLeka = new NabavkaLeka { Naziv = lek.NazivLeka, Cena = lek.Cena, Kolicina = kolicinaLeka, UkupnaCena = ukupnaCena };
-
-                        listaNabavkeLeka.Add(nabavkaLeka);
-
-                    }
+                    Console.Write("Unesite kolicinu leka:");
+                    kolicinaLeka = Convert.ToInt32(Console.ReadLine());
+                    ukupnaCena += lek.Cena * kolicinaLeka;
+                    NabavkaLeka nabavkaLekaKreiranje = new NabavkaLeka { Naziv = lek.NazivLeka, Cena = lek.Cena, Kolicina = kolicinaLeka, UkupnaCena = ukupnaCena };
+                    Narudzbenica narudzbenicaKreiraj = new Narudzbenica { Apotekar = apotekarKreiraj, ListaNabavke = listaNabavkeLeka, Vreme = DateTime.Now, SifraNarudzbine = sifraNarudzbine };
+                    listaNabavkeLeka.Add(nabavkaLekaKreiranje);
+                    listaNarudzbenica.Add(narudzbenicaKreiraj);
                 }
-
-                foreach (NabavkaLeka nabavkaLeka in listaNabavkeLeka)
-                {
-                    Console.WriteLine("Porucen lek:\n" + "Naziv:" + nabavkaLeka.Naziv + "\n" + "Kolicina:" + nabavkaLeka.Kolicina + "\n" + "Cena u jedinici:" + nabavkaLeka.Cena + "\n" + "Ukupna cena:" + nabavkaLeka.UkupnaCena);
-                }
-
-                Console.WriteLine("Da li zelite da nastavite kupovanje lekova unesite 1 za nastavak,a 0 za prekid");
-                Console.Write("Unos:");
-                nastavakUnos = Convert.ToInt32(Console.ReadLine());
-            } while (nastavakUnos != 0);
-
-
+            }
 
 
         }
@@ -385,23 +444,6 @@ namespace ConsoleApp1.Services
             }
         }
 
-        public void IspisiLekoveKojeDobavljacPoseduje()
-        {
-            int izabir;
-            Console.Write("Unesite sifru dobavljaca kojeg zelite da vidite listu lekova:");
-            izabir = Convert.ToInt32(Console.ReadLine());
-
-            for (int i = 0; i < listaDobavljaca.Count; i++)
-            {
-                if (listaDobavljaca[i].IdentifikacioniBroj == izabir)
-                {
-                    for (int j = 0; j < listaDobavljaca[i].ListaLekova.Count; j++)
-                    {
-                        Console.WriteLine(listaDobavljaca[i].ListaLekova[j].SifraLeka + " " + listaDobavljaca[i].ListaLekova[j].NazivLeka + " " + listaDobavljaca[i].ListaLekova[j].Cena);
-                    }
-                }
-            }
-        }
 
         public void IzmeniOdredjenogDobavljaca()
         {
@@ -524,8 +566,6 @@ namespace ConsoleApp1.Services
                     break;
             }
         }
-
-
         public void MeniDobavljaca()
         {
             int izabir;
@@ -535,7 +575,6 @@ namespace ConsoleApp1.Services
             Console.WriteLine("2.Izmeni odredjenog dobavljaca");
             Console.WriteLine("3.Obrisi odredjenog dobavljaca");
             Console.WriteLine("4.Dodaj dobavljaca");
-            Console.WriteLine("5.Prikazi lekove dobavljaca");
             Console.Write("Unos:");
 
             izabir = Convert.ToInt32(Console.ReadLine());
@@ -562,25 +601,19 @@ namespace ConsoleApp1.Services
                     DodajDobavljaca();
                     break;
 
-                case 5:
-                    IspisiLekoveKojeDobavljacPoseduje();
-                    break;
-
                 default:
                     Console.WriteLine("Nepoznat unos!");
                     break;
             }
         }
         //Kraj metoda dobavljaca
-
         public enum Meni
         {
             meniApotekara = 1,
             meniDobavljaca = 2,
             meniLekova = 3,
-            narudzbenica = 4,
+            meniNarudzbina = 4,
             izlaz = 0
         }
-
     }
 }
