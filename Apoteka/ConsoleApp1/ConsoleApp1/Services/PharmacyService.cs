@@ -187,14 +187,15 @@ namespace ConsoleApp1.Services
 
             Lek lekEdit = new Lek { SifraLeka = novaSifraLeka, NazivLeka = noviNazivLeka };
 
-            for (int i = 0; i < listaLekova.Count; i++)
+            foreach (Lek lek in listaLekova)
             {
-                if (listaLekova[i].SifraLeka == sifraLekaIzmena)
+                if (lek.SifraLeka == sifraLekaIzmena)
                 {
-                    listaLekova[i] = lekEdit;
+                    lekEdit = lek;
                 }
             }
         }
+
 
         public void DodajLek()
         {
@@ -259,11 +260,11 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru apotekara kojeg zelite da obrisete:");
             sifraApotekaraZaBrisanje = Convert.ToInt32(Console.ReadLine());
 
-            for (int i = 0; i < listaApotekara.Count; i++)
+            foreach (Apotekar apotekar in listaApotekara)
             {
-                if (listaApotekara[i].IdentifikacioniBroj == sifraApotekaraZaBrisanje)
+                if (apotekar.IdentifikacioniBroj == sifraApotekaraZaBrisanje)
                 {
-                    listaApotekara.RemoveAt(i);
+                    listaApotekara.Remove(apotekar);
                 }
             }
         }
@@ -470,9 +471,12 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru dobavljaca kojeg zelite da obrisete:");
             izabirDobavljacaZaBrisanje = Convert.ToInt32(Console.ReadLine());
 
-            for (int i = 0; i < listaDobavljaca.Count; i++)
+            foreach (Dobavljac dobavljac in listaDobavljaca)
             {
-                listaDobavljaca.RemoveAt(i);
+                if (dobavljac.IdentifikacioniBroj == izabirDobavljacaZaBrisanje)
+                {
+                    listaDobavljaca.Remove(dobavljac);
+                }
             }
         }
 
