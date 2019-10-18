@@ -2,53 +2,66 @@
 
 namespace Zadatak2SistemApoteke
 {
+    //Class used for the model representing
+
     /// <summary>
-    /// Class used for the model representing
+    /// Class used for the model representing the drug distributer.
     /// </summary>
     public class Dobavljac
     {
-        /// <summary>
-        /// UniqueID
-        /// </summary>
-        public int IdentifikacioniBroj;
+        //Constructor of the class
 
         /// <summary>
-        /// UniqueName
-        /// </summary>
-        public string Ime;
-
-        /// <summary>
-        /// UniqueLastname
-        /// </summary>
-        public string Prezime;
-
-        /// <summary>
-        /// UniqueAddress
-        /// </summary>
-        public string Adresa;
-
-        /// <summary>
-        /// UniquePlace
-        /// </summary>
-        public string Mesto;
-
-        /// <summary>
-        /// UniquePhoneNumber
-        /// </summary>
-        public int BrojTelefona;
-
-        /// <summary>
-        /// ListOfMedicine
-        /// </summary>
-        public List<Lek> ListaLekova;
-
-        /// <summary>
-        /// Constructor of class
+        /// Constructor for the Dobavljac class.
         /// </summary>
         public Dobavljac()
         {
             ListaLekova = new List<Lek>();
         }
+
+        // UniqueID
+
+        /// <summary>
+        /// Property representing an unique id of the distributer.
+        /// </summary>
+        public int IdentifikacioniBroj;
+
+        //UniqueName
+
+        /// <summary>
+        /// Property representing the name of the distributer.
+        /// </summary>
+        public string Naziv;
+
+        //UniqueAddress
+
+        /// <summary>
+        /// Property representing the address of the distributer.
+        /// </summary>
+        public string Adresa;
+
+        //UniquePlace
+
+        /// <summary>
+        /// Property representing the location of the distributer.
+        /// </summary>
+        public string Mesto;
+
+        //UniquePhoneNumber
+
+        /// <summary>
+        /// Property representing the phone number of the distributer.
+        /// </summary>
+        public int BrojTelefona;
+
+        //ListOfMedicine
+
+        /// <summary>
+        /// List containing the medicine.
+        /// </summary>
+        public List<Lek> ListaLekova;
+
+       
 
     }
 }
