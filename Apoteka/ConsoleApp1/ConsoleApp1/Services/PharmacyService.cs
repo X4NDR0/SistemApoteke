@@ -7,11 +7,11 @@ namespace ConsoleApp1.Services
 {
     class PharmacyService
     {
-        public static List<Apotekar> listaApotekara = new List<Apotekar>();
-        public static List<Dobavljac> listaDobavljaca = new List<Dobavljac>();
-        public static List<Lek> listaLekova = new List<Lek>();
-        public static List<NabavkaLeka> listaNabavkeLeka = new List<NabavkaLeka>();
-        public static List<Narudzbenica> listaNarudzbenica = new List<Narudzbenica>();
+        private static List<Apotekar> listaApotekara = new List<Apotekar>();
+        private static List<Dobavljac> listaDobavljaca = new List<Dobavljac>();
+        private static List<Lek> listaLekova = new List<Lek>();
+        private static List<NabavkaLeka> listaNabavkeLeka = new List<NabavkaLeka>();
+        private static List<Narudzbenica> listaNarudzbenica = new List<Narudzbenica>();
         public void Initialize()
         {
             LoadData();
@@ -49,7 +49,7 @@ namespace ConsoleApp1.Services
             } while (opcije != Meni.izlaz);
         }
 
-        public void MeniNarudzbina()
+        private void MeniNarudzbina()
         {
             int izabirMeni;
             Console.WriteLine("1.Ispisi sve narudzbine");
@@ -57,7 +57,7 @@ namespace ConsoleApp1.Services
             Console.WriteLine("3.Kreiraj narudzbinu");
             Console.Write("Unos:");
 
-            izabirMeni = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out izabirMeni);
 
             switch (izabirMeni)
             {
@@ -82,7 +82,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        public void ObrisiNarudzbenicu()
+        private void ObrisiNarudzbenicu()
         {
             int brisanjeSelect;
 
@@ -98,7 +98,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        public void MeniTekst()
+        private void MeniTekst()
         {
             Console.WriteLine("1.Meni apotekara");
             Console.WriteLine("2.Meni dobavljaca");
@@ -108,7 +108,7 @@ namespace ConsoleApp1.Services
             Console.Write("Unos:");
         }
 
-        public void IspisiSveNarudzbine()
+        private void IspisiSveNarudzbine()
         {
             for (int i = 0; i < listaNarudzbenica.Count; i++)
             {
@@ -121,7 +121,7 @@ namespace ConsoleApp1.Services
         }
 
         //Metode za apotekara
-        public void IspisiSveApotekare()
+        private void IspisiSveApotekare()
         {
             Console.Clear();
             foreach (Apotekar apotekar in listaApotekara)
@@ -130,7 +130,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        public void IspisiSveLekove()
+        private void IspisiSveLekove()
         {
             foreach (Lek lek in listaLekova)
             {
@@ -138,7 +138,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        public void IspisiLekPoSifri()
+        private void IspisiLekPoSifri()
         {
             int sifraLeka;
 
@@ -154,7 +154,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        public void ObrisiLek()
+        private void ObrisiLek()
         {
             int sifraLekaBrisanje;
 
@@ -170,7 +170,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        public void IzmeniLek()
+        private void IzmeniLek()
         {
             int novaSifraLeka;
             string noviNazivLeka;
@@ -197,7 +197,7 @@ namespace ConsoleApp1.Services
         }
 
 
-        public void DodajLek()
+        private void DodajLek()
         {
             int addSifraLeka;
             string addNazivLeka;
@@ -215,7 +215,7 @@ namespace ConsoleApp1.Services
 
 
 
-        public void IzmeniApotekara()
+        private void IzmeniApotekara()
         {
             Console.Clear();
 
@@ -252,7 +252,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        public void ObrisiApotekara()
+        private void ObrisiApotekara()
         {
             Console.Clear();
             int sifraApotekaraZaBrisanje;
@@ -269,7 +269,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        public void DodajApotekara()
+        private void DodajApotekara()
         {
             Console.Clear();
             int noviIdApotekara;
@@ -295,7 +295,7 @@ namespace ConsoleApp1.Services
         }
 
 
-        public void LoadData()
+        private void LoadData()
         {
             Apotekar apotekar1 = new Apotekar { IdentifikacioniBroj = 5535, Ime = "Zoran", Prezime = "Nikolic", BrojTelefona = 0643876352 };
             Apotekar apotekar2 = new Apotekar { IdentifikacioniBroj = 8473, Ime = "Stefan", Prezime = "Petrovic", BrojTelefona = 0625358261 };
@@ -321,7 +321,7 @@ namespace ConsoleApp1.Services
             listaLekova.Add(lek3);
         }
 
-        public void SistemApotekara()
+        private void SistemApotekara()
         {
             int izabir;
 
@@ -359,7 +359,7 @@ namespace ConsoleApp1.Services
         }
         //Kraj metoda apotekara
 
-        public void KreirajNarudzbenicu()
+        private void KreirajNarudzbenicu()
         {
             Dobavljac dobavljacKreiranje = new Dobavljac();
             Apotekar apotekarKreiraj = new Apotekar();
@@ -420,7 +420,7 @@ namespace ConsoleApp1.Services
         }
 
         //Metode dobavljaca
-        public void IspisiSveDobavljace()
+        private void IspisiSveDobavljace()
         {
             Console.Clear();
             foreach (Dobavljac dobavljac in listaDobavljaca)
@@ -429,7 +429,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        public void IzmeniOdredjenogDobavljaca()
+        private void IzmeniOdredjenogDobavljaca()
         {
             Console.Clear();
             //Promenjive za izmenu
@@ -463,7 +463,7 @@ namespace ConsoleApp1.Services
             noviBrojTelefonDobavljaca = Convert.ToInt32(Console.ReadLine());
         }
 
-        public void ObrisiDobavljaca()
+        private void ObrisiDobavljaca()
         {
             Console.Clear();
             int izabirDobavljacaZaBrisanje;
@@ -480,7 +480,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        public void DodajDobavljaca()
+        private void DodajDobavljaca()
         {
             int addIdDobavljaca;
             string addIme;
@@ -512,7 +512,7 @@ namespace ConsoleApp1.Services
             listaDobavljaca.Add(dobavljacAdd);
         }
 
-        public void MeniLekova()
+        private void MeniLekova()
         {
             int izabir;
 
@@ -553,7 +553,7 @@ namespace ConsoleApp1.Services
                     break;
             }
         }
-        public void MeniDobavljaca()
+        private void MeniDobavljaca()
         {
             int izabir;
 
@@ -594,7 +594,7 @@ namespace ConsoleApp1.Services
             }
         }
         //Kraj metoda dobavljaca
-        public enum Meni
+        private enum Meni
         {
             meniApotekara = 1,
             meniDobavljaca = 2,
