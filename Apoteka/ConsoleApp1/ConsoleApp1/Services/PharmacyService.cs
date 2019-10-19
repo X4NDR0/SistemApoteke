@@ -243,7 +243,7 @@ namespace ConsoleApp1.Services
                 Int32.TryParse(Console.ReadLine(), out novaSifraLeka);
 
                 Console.Write("Unesite novi naziv leka:");
-                Int32.TryParse(Console.ReadLine(), out noviNazivLeka);
+                noviNazivLeka = Console.ReadLine();
 
                 Lek lekEdit = new Lek { SifraLeka = novaSifraLeka, NazivLeka = noviNazivLeka };
 
