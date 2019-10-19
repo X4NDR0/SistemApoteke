@@ -86,16 +86,37 @@ namespace ConsoleApp1.Services
         {
             int brisanjeSelect;
 
-            Console.Write("Unesite sifru narudzbine koju zelite da obrisete!");
+            Console.Write("Unesite sifru narudzbine koju zelite da obrisete:");
             brisanjeSelect = Convert.ToInt32(Console.ReadLine());
 
-            foreach (Narudzbenica narudzbenica in listaNarudzbenica)
+            bool success = CheckAndDeleteOrder(brisanjeSelect);
+
+            if (success)
             {
-                if (narudzbenica.SifraNarudzbine == brisanjeSelect)
+                foreach (Narudzbenica narudzbenica in listaNarudzbenica)
                 {
-                    listaNarudzbenica.Remove(narudzbenica);
+                    if (narudzbenica.SifraNarudzbine == brisanjeSelect)
+                    {
+                        listaNarudzbenica.Remove(narudzbenica);
+                    }
                 }
             }
+            else
+            {
+                Console.WriteLine("Narudzbenica sad tim ID-om ne postoji!");
+            }
+        }
+
+        private bool CheckAndDeleteOrder(int orderID)
+        {
+            foreach (Narudzbenica narudzbenica in listaNarudzbenica)
+            {
+                if (narudzbenica.SifraNarudzbine == orderID)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void MeniTekst()
@@ -145,14 +166,31 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka koji zelite da ispisete:");
             sifraLeka = Convert.ToInt32(Console.ReadLine());
 
-            foreach (Lek lek in listaLekova)
+            bool success = CheckAndWriteMedicineWithID(sifraLeka);
+
+            if (success)
             {
-                if (lek.SifraLeka == sifraLeka)
-                {
-                    Console.WriteLine(lek.SifraLeka + " " + lek.NazivLeka);
-                }
+
+            }
+            else
+            {
+                Console.WriteLine("Sifra leka ne postoji!");
             }
         }
+
+        private bool CheckAndWriteMedicineWithID(int medineID)
+        {
+            foreach (Lek lek in listaLekova)
+            {
+                if (lek.SifraLeka == medineID)
+                {
+                    Console.WriteLine(lek.SifraLeka + " " + lek.NazivLeka);
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         private void ObrisiLek()
         {
@@ -197,23 +235,43 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka kojeg zelite da izmenite:");
             sifraLekaIzmena = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Unesite novu sifru leka:");
-            novaSifraLeka = Convert.ToInt32(Console.ReadLine());
+            bool success = CheckAndChangeMedicine(sifraLekaIzmena);
 
-            Console.Write("Unesite novi naziv leka:");
-            noviNazivLeka = Console.ReadLine();
-
-            Lek lekEdit = new Lek { SifraLeka = novaSifraLeka, NazivLeka = noviNazivLeka };
-
-            foreach (Lek lek in listaLekova)
+            if (success)
             {
-                if (lek.SifraLeka == sifraLekaIzmena)
+                Console.Write("Unesite novu sifru leka:");
+                novaSifraLeka = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("Unesite novi naziv leka:");
+                noviNazivLeka = Console.ReadLine();
+
+                Lek lekEdit = new Lek { SifraLeka = novaSifraLeka, NazivLeka = noviNazivLeka };
+
+                foreach (Lek lek in listaLekova)
                 {
-                    lekEdit = lek;
+                    if (lek.SifraLeka == sifraLekaIzmena)
+                    {
+                        lekEdit = lek;
+                    }
                 }
+            }
+            else
+            {
+                Console.WriteLine("Sifra leka ne postoji!");
             }
         }
 
+        private bool CheckAndChangeMedicine(int medicine)
+        {
+            foreach (Lek lek in listaLekova)
+            {
+                if (lek.SifraLeka == medicine)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         private void DodajLek()
         {
@@ -223,15 +281,34 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka:");
             addSifraLeka = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Unesite naziv leka:");
-            addNazivLeka = Console.ReadLine();
+            bool success = CheckAndAddMedicine(addSifraLeka);
 
-            Lek lekAdd = new Lek { SifraLeka = addSifraLeka, NazivLeka = addNazivLeka };
+            if (success)
+            {
+                Console.Write("Unesite naziv leka:");
+                addNazivLeka = Console.ReadLine();
 
-            listaLekova.Add(lekAdd);
+                Lek lekAdd = new Lek { SifraLeka = addSifraLeka, NazivLeka = addNazivLeka };
+
+                listaLekova.Add(lekAdd);
+            }
+            else
+            {
+                Console.WriteLine("Nemozete koristiti taj ID jer neki drugi lek koristi taj!");
+            }
         }
 
-
+        private bool CheckAndAddMedicine(int idMedicine)
+        {
+            foreach (Lek lek in listaLekova)
+            {
+                if (lek.SifraLeka == idMedicine)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         private void IzmeniApotekara()
         {
@@ -248,27 +325,51 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru apotekara za izmenu:");
             sifraApotekaraZaIzmenu = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Unesite novu sifru apotekara:");
-            novaSifraApotekara = Convert.ToInt32(Console.ReadLine());
+            bool success = CheckAndChangePharmacyst(sifraApotekaraZaIzmenu);
 
-            Console.Write("Unesite novo ime apotekara:");
-            novoImeApotekara = Console.ReadLine();
-
-            Console.Write("Unesite novo prezime apotekara:");
-            novoPrezimeApotekara = Console.ReadLine();
-
-            Console.Write("Unesite novi broj telefona apotekara:");
-            noviBrojTelefonaApotekara = Convert.ToInt32(Console.ReadLine());
-
-            for (int i = 0; i < listaApotekara.Count; i++)
+            if (success)
             {
-                if (listaApotekara[i].IdentifikacioniBroj == sifraApotekaraZaIzmenu)
+
+                Console.Write("Unesite novu sifru apotekara:");
+                novaSifraApotekara = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("Unesite novo ime apotekara:");
+                novoImeApotekara = Console.ReadLine();
+
+                Console.Write("Unesite novo prezime apotekara:");
+                novoPrezimeApotekara = Console.ReadLine();
+
+                Console.Write("Unesite novi broj telefona apotekara:");
+                noviBrojTelefonaApotekara = Convert.ToInt32(Console.ReadLine());
+
+                for (int i = 0; i < listaApotekara.Count; i++)
                 {
-                    Apotekar apotekarIzmena = new Apotekar { IdentifikacioniBroj = novaSifraApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara, BrojTelefona = noviBrojTelefonaApotekara };
-                    listaApotekara[i] = apotekarIzmena;
+                    if (listaApotekara[i].IdentifikacioniBroj == sifraApotekaraZaIzmenu)
+                    {
+                        Apotekar apotekarIzmena = new Apotekar { IdentifikacioniBroj = novaSifraApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara, BrojTelefona = noviBrojTelefonaApotekara };
+                        listaApotekara[i] = apotekarIzmena;
+                    }
                 }
             }
+            else
+            {
+                Console.WriteLine("Apotekar pod tim ID-om ne postoji!");
+            }
         }
+
+        private bool CheckAndChangePharmacyst(int pharmacystID)
+        {
+            foreach (Apotekar apotekar in listaApotekara)
+            {
+                if (apotekar.IdentifikacioniBroj == pharmacystID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
 
         private void ObrisiApotekara()
         {
@@ -278,14 +379,32 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru apotekara kojeg zelite da obrisete:");
             sifraApotekaraZaBrisanje = Convert.ToInt32(Console.ReadLine());
 
+            bool success = FindAndDeletePharmacyst(sifraApotekaraZaBrisanje);
+
+            if (success)
+            {
+                Console.WriteLine("Uspesno ste obrisali apotekara!");
+            }
+            else
+            {
+                Console.WriteLine("Apotekara pod tim ID-om ne postoji!");
+            }
+
+        }
+
+        private bool FindAndDeletePharmacyst(int pharmacystID)
+        {
             foreach (Apotekar apotekar in listaApotekara)
             {
-                if (apotekar.IdentifikacioniBroj == sifraApotekaraZaBrisanje)
+                if (apotekar.IdentifikacioniBroj == pharmacystID)
                 {
                     listaApotekara.Remove(apotekar);
+                    return true;
                 }
             }
+            return false;
         }
+
 
         private void DodajApotekara()
         {
@@ -298,20 +417,39 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite id apotekara:");
             noviIdApotekara = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Unesite ime apotekara:");
-            novoImeApotekara = Console.ReadLine();
+            bool success = CheckPharmacystID(noviIdApotekara);
+            if (success)
+            {
+                Console.Write("Unesite ime apotekara:");
+                novoImeApotekara = Console.ReadLine();
 
-            Console.Write("Unesite prezime apotekara:");
-            novoPrezimeApotekara = Console.ReadLine();
+                Console.Write("Unesite prezime apotekara:");
+                novoPrezimeApotekara = Console.ReadLine();
 
-            Console.Write("Unesite broj telefona apotekara:");
-            noviBrojTelefonaApotekara = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Unesite broj telefona apotekara:");
+                noviBrojTelefonaApotekara = Convert.ToInt32(Console.ReadLine());
 
-            Apotekar apotekarKreiranje = new Apotekar { IdentifikacioniBroj = noviIdApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara, BrojTelefona = noviBrojTelefonaApotekara };
+                Apotekar apotekarKreiranje = new Apotekar { IdentifikacioniBroj = noviIdApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara, BrojTelefona = noviBrojTelefonaApotekara };
 
-            listaApotekara.Add(apotekarKreiranje);
+                listaApotekara.Add(apotekarKreiranje);
+            }
+            else
+            {
+                Console.WriteLine("Apotekar sa tim ID-om vec postoji!");
+            }
         }
 
+        private bool CheckPharmacystID(int pharmacystAddID)
+        {
+            foreach (Apotekar apotekar in listaApotekara)
+            {
+                if (apotekar.IdentifikacioniBroj == pharmacystAddID)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         private void LoadData()
         {
@@ -462,24 +600,69 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru dobavljaca kojeg zelite da izmenite:");
             izabirDobavljacaZaIzmenu = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Unesite novu sifru dobavljaca:");
-            novaSifraDobavljaca = Convert.ToInt32(Console.ReadLine());
+            bool success = CheckAndChangeDobavljaca(izabirDobavljacaZaIzmenu);
 
-            Console.Write("Unesite novo ime dobavljaca");
-            novoImeDobavljaca = Console.ReadLine();
+            if (success)
+            {
+                Console.Write("Unesite novu sifru dobavljaca:");
+                novaSifraDobavljaca = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Unesite novo prezime dobavljaca");
-            novoPrezimeDobavljaca = Console.ReadLine();
+                bool success2 = CheckAndChangeDobavljaca2(novaSifraDobavljaca);
 
-            Console.Write("Unesite novu adresu dobavljaca");
-            novaAdresaDobavljaca = Console.ReadLine();
+                if (success2)
+                {
+                    Console.Write("Unesite novo ime dobavljaca");
+                    novoImeDobavljaca = Console.ReadLine();
 
-            Console.Write("Unesite novo mesto dobavljaca");
-            novoMestoDobavljaca = Console.ReadLine();
+                    Console.Write("Unesite novo prezime dobavljaca");
+                    novoPrezimeDobavljaca = Console.ReadLine();
 
-            Console.Write("Unesite novi broj telefona dobavljaca");
-            noviBrojTelefonDobavljaca = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Unesite novu adresu dobavljaca");
+                    novaAdresaDobavljaca = Console.ReadLine();
+
+                    Console.Write("Unesite novo mesto dobavljaca");
+                    novoMestoDobavljaca = Console.ReadLine();
+
+                    Console.Write("Unesite novi broj telefona dobavljaca");
+                    noviBrojTelefonDobavljaca = Convert.ToInt32(Console.ReadLine());
+                }
+                else
+                {
+                    Console.WriteLine("Dobavljac sa tim ID-om vec postoji!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Dobavljac pod tim ID-om ne postoji!");
+            }
+
         }
+
+        private bool CheckAndChangeDobavljaca(int dobavljacID)
+        {
+            foreach (Dobavljac dobavljac in listaDobavljaca)
+            {
+                if (dobavljac.IdentifikacioniBroj == dobavljacID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        private bool CheckAndChangeDobavljaca2(int dobavljacID)
+        {
+            foreach (Dobavljac dobavljac in listaDobavljaca)
+            {
+                if (dobavljac.IdentifikacioniBroj == dobavljacID)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
 
         private void ObrisiDobavljaca()
         {
@@ -489,14 +672,31 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru dobavljaca kojeg zelite da obrisete:");
             izabirDobavljacaZaBrisanje = Convert.ToInt32(Console.ReadLine());
 
-            foreach (Dobavljac dobavljac in listaDobavljaca)
+            bool success = CheckAndDeleteDobavljaca(izabirDobavljacaZaBrisanje);
+
+            if (success)
             {
-                if (dobavljac.IdentifikacioniBroj == izabirDobavljacaZaBrisanje)
-                {
-                    listaDobavljaca.Remove(dobavljac);
-                }
+                Console.WriteLine("Uspesno ste obrisali dobavljaca!");
+            }
+            else
+            {
+                Console.WriteLine("Dobavljac pod tim ID-om ne postoji!");
             }
         }
+
+        private bool CheckAndDeleteDobavljaca(int dobavljacDelete)
+        {
+            foreach (Dobavljac dobavljac in listaDobavljaca)
+            {
+                if (dobavljac.IdentifikacioniBroj == dobavljacDelete)
+                {
+                    listaDobavljaca.Remove(dobavljac);
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         private void DodajDobavljaca()
         {
@@ -510,24 +710,45 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite ID dobavljaca:");
             addIdDobavljaca = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Unesite ime dobavljaca:");
-            addIme = Console.ReadLine();
+            bool success = CheckAndAddDobavljaca(addIdDobavljaca);
 
-            Console.Write("Unesite prezime dobavljaca:");
-            addPrezime = Console.ReadLine();
+            if (success)
+            {
+                Console.Write("Unesite ime dobavljaca:");
+                addIme = Console.ReadLine();
 
-            Console.Write("Unesite adresu dobavljaca:");
-            addAdresa = Console.ReadLine();
+                Console.Write("Unesite prezime dobavljaca:");
+                addPrezime = Console.ReadLine();
 
-            Console.Write("Unesite mesto dobavljaca:");
-            addMesto = Console.ReadLine();
+                Console.Write("Unesite adresu dobavljaca:");
+                addAdresa = Console.ReadLine();
 
-            Console.Write("Unesite broj telefona dobavljaca:");
-            addBrojTelefona = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Unesite mesto dobavljaca:");
+                addMesto = Console.ReadLine();
 
-            Dobavljac dobavljacAdd = new Dobavljac { IdentifikacioniBroj = addIdDobavljaca, Ime = addIme, Prezime = addPrezime, Adresa = addAdresa, Mesto = addMesto, BrojTelefona = addBrojTelefona };
+                Console.Write("Unesite broj telefona dobavljaca:");
+                addBrojTelefona = Convert.ToInt32(Console.ReadLine());
 
-            listaDobavljaca.Add(dobavljacAdd);
+                Dobavljac dobavljacAdd = new Dobavljac { IdentifikacioniBroj = addIdDobavljaca, Ime = addIme, Prezime = addPrezime, Adresa = addAdresa, Mesto = addMesto, BrojTelefona = addBrojTelefona };
+
+                listaDobavljaca.Add(dobavljacAdd);
+            }
+            else
+            {
+                Console.WriteLine("Nemozete uneti taj id jer neki drugi dobavljac koristi taj!");
+            }
+        }
+
+        private bool CheckAndAddDobavljaca(int dobavljacID)
+        {
+            foreach (Dobavljac dobavljac in listaDobavljaca)
+            {
+                if (dobavljac.IdentifikacioniBroj == dobavljacID)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void MeniLekova()

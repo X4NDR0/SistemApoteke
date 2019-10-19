@@ -1,27 +1,27 @@
 ﻿namespace ConsoleApp1.Models
 {
     /// <summary>
-    /// Class used for the model representing
+    /// Class used for the model representing the procurement medicine
     /// </summary>
     public class NabavkaLeka
     {
         /// <summary>
-        /// ProcurementMedicineName;
+        /// Property representing the name of the procurement medicine;
         /// </summary>
         public string Naziv;
 
         /// <summary>
-        /// ProcurementMedicinePrice
+        /// Property representing the price of the procurement medicine
         /// </summary>
         public double Cena;
 
         /// <summary>
-        /// ProcurementMedicineTotalPrice
+        /// Property representing the total price of the procurement medicine
         /// </summary>
         public double UkupnaCena;
 
         /// <summary>
-        /// ProcurementMedicineQuantity
+        /// Property representing the quanity of the procurement medicine
         /// </summary>
         public int Kolicina;
     }

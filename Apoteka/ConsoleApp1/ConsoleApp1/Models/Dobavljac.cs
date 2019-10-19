@@ -2,15 +2,11 @@
 
 namespace Zadatak2SistemApoteke
 {
-    //Class used for the model representing
-
     /// <summary>
     /// Class used for the model representing the drug distributer.
     /// </summary>
     public class Dobavljac
     {
-        //Constructor of the class
-
         /// <summary>
         /// Constructor for the Dobavljac class.
         /// </summary>
@@ -19,14 +15,10 @@ namespace Zadatak2SistemApoteke
             ListaLekova = new List<Lek>();
         }
 
-        // UniqueID
-
         /// <summary>
         /// Property representing an unique id of the distributer.
         /// </summary>
         public int IdentifikacioniBroj;
-
-        //UniqueName
 
         /// <summary>
         /// Property representing the name of the distributer.
@@ -52,7 +44,6 @@ namespace Zadatak2SistemApoteke
         /// </summary>
         public string Mesto;
 
-        //UniquePhoneNumber
 
         /// <summary>
         /// Property representing the phone number of the distributer.
