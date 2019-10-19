@@ -149,5 +149,15 @@
             Property representing the order list of the order.
             </summary>
         </member>
+        <member name="T:ConsoleApp1.Services.PharmacyService">
+            <summary>
+            Service used to manipulate the pharmacy data.
+            </summary>
+        </member>
+        <member name="M:ConsoleApp1.Services.PharmacyService.Initialize">
+            <summary>
+            Used to run the main service method.
+            </summary>
+        </member>
     </members>
 </doc>

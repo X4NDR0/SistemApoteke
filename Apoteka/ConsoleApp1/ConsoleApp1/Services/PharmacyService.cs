@@ -96,18 +96,11 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru narudzbine koju zelite da obrisete:");
             Int32.TryParse(Console.ReadLine(), out brisanjeSelect);
 
-            bool success = CheckOrderID(brisanjeSelect);
+            Narudzbenica pronadjenaNarudzbenica = CheckOrderID(brisanjeSelect);
 
-            if (success)
+            if (pronadjenaNarudzbenica != null)
             {
-                for (int i = 0; i < listaNarudzbenica.Count; i++)
-                {
-                    if (listaNarudzbenica[i].SifraNarudzbine == brisanjeSelect)
-                    {
-                        listaNarudzbenica.RemoveAt(i);
-                        Console.WriteLine("Uspesno ste obrisali narudzbenicu");
-                    }
-                }
+                listaNarudzbenica.Remove(pronadjenaNarudzbenica);
             }
             else
             {
@@ -115,16 +108,16 @@ namespace ConsoleApp1.Services
             }
         }
 
-        private bool CheckOrderID(int orderID)
+        private Narudzbenica CheckOrderID(int orderID)
         {
             foreach (Narudzbenica narudzbenica in listaNarudzbenica)
             {
                 if (narudzbenica.SifraNarudzbine == orderID)
                 {
-                    return true;
+                    return narudzbenica;
                 }
             }
-            return false;
+            return null;
         }
 
         private void MeniTekst()
@@ -173,9 +166,9 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka koji zelite da ispisete:");
             Int32.TryParse(Console.ReadLine(), out sifraLeka);
 
-            bool success = CheckMedicineID(sifraLeka);
+            Lek pronadjenLek = CheckMedicineID(sifraLeka);
 
-            if (success)
+            if (pronadjenLek != null)
             {
                 foreach (Lek lek in listaLekova)
                 {
@@ -198,9 +191,9 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka kojeg zelite da obrisete:");
             Int32.TryParse(Console.ReadLine(), out sifraLekaBrisanje);
 
-            bool success = CheckMedicineID(sifraLekaBrisanje);
+            Lek pronadjenLek = CheckMedicineID(sifraLekaBrisanje);
 
-            if (success)
+            if (pronadjenLek != null)
             {
                 for (int i = 0; i < listaLekova.Count; i++)
                 {
@@ -218,16 +211,16 @@ namespace ConsoleApp1.Services
 
         }
 
-        private bool CheckMedicineID(int lekID)
+        private Lek CheckMedicineID(int lekID)
         {
             foreach (Lek lek in listaLekova)
             {
                 if (lek.SifraLeka == lekID)
                 {
-                    return true;
+                    return lek;
                 }
             }
-            return false;
+            return null;
         }
 
         private void IzmeniLek()
@@ -239,9 +232,9 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka kojeg zelite da izmenite:");
             Int32.TryParse(Console.ReadLine(), out sifraLekaIzmena);
 
-            bool success = CheckMedicineID(sifraLekaIzmena);
+            Lek pronadjenLek = CheckMedicineID(sifraLekaIzmena);
 
-            if (success)
+            if (pronadjenLek != null)
             {
                 Console.Write("Unesite novu sifru leka:");
                 Int32.TryParse(Console.ReadLine(), out novaSifraLeka);
@@ -273,9 +266,9 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka:");
             Int32.TryParse(Console.ReadLine(), out addSifraLeka);
 
-            bool success = CheckMedicineID(addSifraLeka);
+            Lek pronadjenLek = CheckMedicineID(addSifraLeka);
 
-            if (success)
+            if (pronadjenLek != null)
             {
                 Console.WriteLine("Nemozete koristiti taj ID jer neki drugi lek koristi taj!");
             }
@@ -305,9 +298,9 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru apotekara za izmenu:");
             Int32.TryParse(Console.ReadLine(), out sifraApotekaraZaIzmenu);
 
-            bool success = CheckPharmacystID(sifraApotekaraZaIzmenu);
+            Apotekar pronadjenApotekar = CheckPharmacystID(sifraApotekaraZaIzmenu);
 
-            if (success)
+            if (pronadjenApotekar != null)
             {
                 Console.Write("Unesite novu sifru apotekara:");
                 Int32.TryParse(Console.ReadLine(), out novaSifraApotekara);
@@ -336,16 +329,16 @@ namespace ConsoleApp1.Services
             }
         }
 
-        private bool CheckPharmacystID(int pharmacystID)
+        private Apotekar CheckPharmacystID(int pharmacystID)
         {
             foreach (Apotekar apotekar in listaApotekara)
             {
                 if (apotekar.IdentifikacioniBroj == pharmacystID)
                 {
-                    return true;
+                    return apotekar;
                 }
             }
-            return false;
+            return null;
         }
 
 
@@ -358,9 +351,9 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru apotekara kojeg zelite da obrisete:");
             Int32.TryParse(Console.ReadLine(), out sifraApotekaraZaBrisanje);
 
-            bool success = CheckPharmacystID(sifraApotekaraZaBrisanje);
+            Apotekar pronadjenApotekar = CheckPharmacystID(sifraApotekaraZaBrisanje);
 
-            if (success)
+            if (pronadjenApotekar != null)
             {
                 for (int i = 0; i < listaApotekara.Count; i++)
                 {
@@ -389,8 +382,8 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite id apotekara:");
             Int32.TryParse(Console.ReadLine(), out noviIdApotekara);
 
-            bool success = CheckPharmacystID(noviIdApotekara);
-            if (success)
+            Apotekar pronadjenApotekar = CheckPharmacystID(noviIdApotekara);
+            if (pronadjenApotekar != null)
             {
                 Console.WriteLine("Apotekar sa tim ID-om vec postoji!");
             }
