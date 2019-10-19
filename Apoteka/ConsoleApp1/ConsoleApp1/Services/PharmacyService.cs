@@ -5,13 +5,20 @@ using Zadatak2SistemApoteke;
 
 namespace ConsoleApp1.Services
 {
-    class PharmacyService
+    /// <summary>
+    /// Service used to manipulate the pharmacy data.
+    /// </summary>
+    public class PharmacyService
     {
         private static List<Apotekar> listaApotekara = new List<Apotekar>();
         private static List<Dobavljac> listaDobavljaca = new List<Dobavljac>();
         private static List<Lek> listaLekova = new List<Lek>();
         private static List<NabavkaLeka> listaNabavkeLeka = new List<NabavkaLeka>();
         private static List<Narudzbenica> listaNarudzbenica = new List<Narudzbenica>();
+
+        /// <summary>
+        /// Used to run the main service method.
+        /// </summary>
         public void Initialize()
         {
             LoadData();
@@ -87,7 +94,7 @@ namespace ConsoleApp1.Services
             int brisanjeSelect;
 
             Console.Write("Unesite sifru narudzbine koju zelite da obrisete:");
-            Int32.TryParse(Console.ReadLine(),out brisanjeSelect);
+            Int32.TryParse(Console.ReadLine(), out brisanjeSelect);
 
             bool success = CheckOrderID(brisanjeSelect);
 
@@ -142,7 +149,6 @@ namespace ConsoleApp1.Services
             }
         }
 
-        //Metode za apotekara
         private void IspisiSveApotekare()
         {
             Console.Clear();
@@ -185,7 +191,6 @@ namespace ConsoleApp1.Services
             }
         }
 
-
         private void ObrisiLek()
         {
             int sifraLekaBrisanje;
@@ -224,7 +229,6 @@ namespace ConsoleApp1.Services
             }
             return false;
         }
-
 
         private void IzmeniLek()
         {
@@ -305,7 +309,6 @@ namespace ConsoleApp1.Services
 
             if (success)
             {
-
                 Console.Write("Unesite novu sifru apotekara:");
                 Int32.TryParse(Console.ReadLine(), out novaSifraApotekara);
 
@@ -374,7 +377,6 @@ namespace ConsoleApp1.Services
             }
 
         }
-
 
         private void DodajApotekara()
         {
@@ -598,7 +600,6 @@ namespace ConsoleApp1.Services
             return false;
         }
 
-
         private void ObrisiDobavljaca()
         {
             Console.Clear();
@@ -626,8 +627,6 @@ namespace ConsoleApp1.Services
                 Console.WriteLine("Dobavljac pod tim ID-om ne postoji!");
             }
         }
-
-
 
         private void DodajDobavljaca()
         {
@@ -751,7 +750,7 @@ namespace ConsoleApp1.Services
                     break;
             }
         }
-        //Kraj metoda dobavljaca
+
         private enum Meni
         {
             meniApotekara = 1,

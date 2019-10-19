@@ -2,22 +2,22 @@
 namespace Zadatak2SistemApoteke
 {
     /// <summary>
-    /// Class used for the model representing the medicine
+    /// Class used for the model representing the medicine.
     /// </summary>
     public class Lek
     {
         /// <summary>
-        /// Property representing an unique id of the medicine.
+        /// Property representing a unique id of the medicine.
         /// </summary>
         public int SifraLeka;
 
         /// <summary>
-        /// Property representing an name of the medicine.
+        /// Property representing the name of the medicine.
         /// </summary>
         public string NazivLeka;
 
         /// <summary>
-        /// Property representing an last name of the medicine.
+        /// Property representing the last name of the medicine.
         /// </summary>
         public double Cena;
     }
