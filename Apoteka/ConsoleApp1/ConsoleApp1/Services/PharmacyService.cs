@@ -607,35 +607,25 @@ namespace ConsoleApp1.Services
                 Console.Write("Unesite novu sifru dobavljaca:");
                 novaSifraDobavljaca = Convert.ToInt32(Console.ReadLine());
 
-                bool success2 = CheckAndChangeDobavljaca2(novaSifraDobavljaca);
+                Console.Write("Unesite novo ime dobavljaca");
+                novoImeDobavljaca = Console.ReadLine();
 
-                if (success2)
-                {
-                    Console.Write("Unesite novo ime dobavljaca");
-                    novoImeDobavljaca = Console.ReadLine();
+                Console.Write("Unesite novo prezime dobavljaca");
+                novoPrezimeDobavljaca = Console.ReadLine();
 
-                    Console.Write("Unesite novo prezime dobavljaca");
-                    novoPrezimeDobavljaca = Console.ReadLine();
+                Console.Write("Unesite novu adresu dobavljaca");
+                novaAdresaDobavljaca = Console.ReadLine();
 
-                    Console.Write("Unesite novu adresu dobavljaca");
-                    novaAdresaDobavljaca = Console.ReadLine();
+                Console.Write("Unesite novo mesto dobavljaca");
+                novoMestoDobavljaca = Console.ReadLine();
 
-                    Console.Write("Unesite novo mesto dobavljaca");
-                    novoMestoDobavljaca = Console.ReadLine();
-
-                    Console.Write("Unesite novi broj telefona dobavljaca");
-                    noviBrojTelefonDobavljaca = Convert.ToInt32(Console.ReadLine());
-                }
-                else
-                {
-                    Console.WriteLine("Dobavljac sa tim ID-om vec postoji!");
-                }
+                Console.Write("Unesite novi broj telefona dobavljaca");
+                noviBrojTelefonDobavljaca = Convert.ToInt32(Console.ReadLine());
             }
             else
             {
-                Console.WriteLine("Dobavljac pod tim ID-om ne postoji!");
+                Console.WriteLine("Dobavljac sa tim ID-om vec postoji!");
             }
-
         }
 
         private bool CheckAndChangeDobavljaca(int dobavljacID)
@@ -648,19 +638,6 @@ namespace ConsoleApp1.Services
                 }
             }
             return false;
-        }
-
-
-        private bool CheckAndChangeDobavljaca2(int dobavljacID)
-        {
-            foreach (Dobavljac dobavljac in listaDobavljaca)
-            {
-                if (dobavljac.IdentifikacioniBroj == dobavljacID)
-                {
-                    return false;
-                }
-            }
-            return true;
         }
 
 
