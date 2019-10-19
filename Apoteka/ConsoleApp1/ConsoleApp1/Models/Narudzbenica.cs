@@ -10,6 +10,15 @@ namespace ConsoleApp1.Models
     public class Narudzbenica
     {
         /// <summary>
+        /// Constructor of class
+        /// </summary>
+        public Narudzbenica()
+        {
+            Apotekar = new Apotekar();
+            ListaNabavke = new List<NabavkaLeka>();
+        }
+
+        /// <summary>
         /// OrderID
         /// </summary>
         public int SifraNarudzbine;
@@ -28,14 +37,5 @@ namespace ConsoleApp1.Models
         /// OrderList
         /// </summary>
         public List<NabavkaLeka> ListaNabavke;
-
-        /// <summary>
-        /// Constructor of class
-        /// </summary>
-        public Narudzbenica()
-        {
-            Apotekar = new Apotekar();
-            ListaNabavke = new List<NabavkaLeka>();
-        }
     }
 }

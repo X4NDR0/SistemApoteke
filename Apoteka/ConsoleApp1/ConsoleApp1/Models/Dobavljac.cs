@@ -31,7 +31,12 @@ namespace Zadatak2SistemApoteke
         /// <summary>
         /// Property representing the name of the distributer.
         /// </summary>
-        public string Naziv;
+        public string Ime;
+
+        /// <summary>
+        /// Property representing the lastname of the distributer.
+        /// </summary>
+        public string Prezime;
 
         //UniqueAddress
 

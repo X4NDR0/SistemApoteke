@@ -4,8 +4,150 @@
         <name>ConsoleApp1</name>
     </assembly>
     <members>
+        <member name="T:Zadatak2SistemApoteke.Apotekar">
+            <summary>
+            Class used for the model representing the pharmacist.
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Apotekar.IdentifikacioniBroj">
+            <summary>
+            Property representing an unique id of the pharmacist
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Apotekar.Ime">
+            <summary>
+            Property representing the name of the pharmacist.
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Apotekar.Prezime">
+            <summary>
+            Property representing the last name of the pharmacist.
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Apotekar.BrojTelefona">
+            <summary>
+            Property representing the phone number of the pharmacist.
+            </summary>
+        </member>
+        <member name="T:Zadatak2SistemApoteke.Dobavljac">
+            <summary>
+            Class used for the model representing the drug distributer.
+            </summary>
+        </member>
+        <member name="M:Zadatak2SistemApoteke.Dobavljac.#ctor">
+            <summary>
+            Constructor for the Dobavljac class.
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Dobavljac.IdentifikacioniBroj">
+            <summary>
+            Property representing an unique id of the distributer.
+            </summary>
+        </member>
         <member name="F:Zadatak2SistemApoteke.Dobavljac.Ime">
-            UniqueID
+            <summary>
+            Property representing the name of the distributer.
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Dobavljac.Prezime">
+            <summary>
+            Property representing the lastname of the distributer.
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Dobavljac.Adresa">
+            <summary>
+            Property representing the address of the distributer.
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Dobavljac.Mesto">
+            <summary>
+            Property representing the location of the distributer.
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Dobavljac.BrojTelefona">
+            <summary>
+            Property representing the phone number of the distributer.
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Dobavljac.ListaLekova">
+            <summary>
+            List containing the medicine.
+            </summary>
+        </member>
+        <member name="T:Zadatak2SistemApoteke.Lek">
+            <summary>
+            Class used for the model representing
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Lek.SifraLeka">
+            <summary>
+            MedicineID
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Lek.NazivLeka">
+            <summary>
+            MedicineName
+            </summary>
+        </member>
+        <member name="F:Zadatak2SistemApoteke.Lek.Cena">
+            <summary>
+            MedicinePrice
+            </summary>
+        </member>
+        <member name="T:ConsoleApp1.Models.NabavkaLeka">
+            <summary>
+            Class used for the model representing
+            </summary>
+        </member>
+        <member name="F:ConsoleApp1.Models.NabavkaLeka.Naziv">
+            <summary>
+            ProcurementMedicineName;
+            </summary>
+        </member>
+        <member name="F:ConsoleApp1.Models.NabavkaLeka.Cena">
+            <summary>
+            ProcurementMedicinePrice
+            </summary>
+        </member>
+        <member name="F:ConsoleApp1.Models.NabavkaLeka.UkupnaCena">
+            <summary>
+            ProcurementMedicineTotalPrice
+            </summary>
+        </member>
+        <member name="F:ConsoleApp1.Models.NabavkaLeka.Kolicina">
+            <summary>
+            ProcurementMedicineQuantity
+            </summary>
+        </member>
+        <member name="T:ConsoleApp1.Models.Narudzbenica">
+            <summary>
+            Class used for the model representing
+            </summary>
+        </member>
+        <member name="M:ConsoleApp1.Models.Narudzbenica.#ctor">
+            <summary>
+            Constructor of class
+            </summary>
+        </member>
+        <member name="F:ConsoleApp1.Models.Narudzbenica.SifraNarudzbine">
+            <summary>
+            OrderID
+            </summary>
+        </member>
+        <member name="F:ConsoleApp1.Models.Narudzbenica.Vreme">
+            <summary>
+            OrderTime
+            </summary>
+        </member>
+        <member name="F:ConsoleApp1.Models.Narudzbenica.Apotekar">
+            <summary>
+            UniqueApothecary
+            </summary>
+        </member>
+        <member name="F:ConsoleApp1.Models.Narudzbenica.ListaNabavke">
+            <summary>
+            OrderList
+            </summary>
         </member>
     </members>
 </doc>

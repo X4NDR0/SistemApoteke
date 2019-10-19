@@ -161,14 +161,32 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka kojeg zelite da obrisete:");
             sifraLekaBrisanje = Convert.ToInt32(Console.ReadLine());
 
+            bool success = FindAndDeleteMedicine(sifraLekaBrisanje);
+
+            if (success)
+            {
+                Console.WriteLine("Uspesno ste obrisali lek!");
+            }
+            else
+            {
+                Console.WriteLine("Sifra leka koju ste hteli da obrisete ne postoji!");
+            }
+
+        }
+
+        private bool FindAndDeleteMedicine(int lekID)
+        {
             foreach (Lek lek in listaLekova)
             {
-                if (lek.SifraLeka == sifraLekaBrisanje)
+                if (lek.SifraLeka == lekID)
                 {
                     listaLekova.Remove(lek);
+                    return true;
                 }
             }
+            return false;
         }
+
 
         private void IzmeniLek()
         {
