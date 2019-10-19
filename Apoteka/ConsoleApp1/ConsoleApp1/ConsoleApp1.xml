@@ -76,77 +76,77 @@
         </member>
         <member name="T:Zadatak2SistemApoteke.Lek">
             <summary>
-            Class used for the model representing
+            Class used for the model representing the medicine
             </summary>
         </member>
         <member name="F:Zadatak2SistemApoteke.Lek.SifraLeka">
             <summary>
-            MedicineID
+            Property representing an unique id of the medicine.
             </summary>
         </member>
         <member name="F:Zadatak2SistemApoteke.Lek.NazivLeka">
             <summary>
-            MedicineName
+            Property representing an name of the medicine.
             </summary>
         </member>
         <member name="F:Zadatak2SistemApoteke.Lek.Cena">
             <summary>
-            MedicinePrice
+            Property representing an last name of the medicine.
             </summary>
         </member>
         <member name="T:ConsoleApp1.Models.NabavkaLeka">
             <summary>
-            Class used for the model representing
+            Class used for the model representing the procurement medicine
             </summary>
         </member>
         <member name="F:ConsoleApp1.Models.NabavkaLeka.Naziv">
             <summary>
-            ProcurementMedicineName;
+            Property representing the name of the procurement medicine;
             </summary>
         </member>
         <member name="F:ConsoleApp1.Models.NabavkaLeka.Cena">
             <summary>
-            ProcurementMedicinePrice
+            Property representing the price of the procurement medicine
             </summary>
         </member>
         <member name="F:ConsoleApp1.Models.NabavkaLeka.UkupnaCena">
             <summary>
-            ProcurementMedicineTotalPrice
+            Property representing the total price of the procurement medicine
             </summary>
         </member>
         <member name="F:ConsoleApp1.Models.NabavkaLeka.Kolicina">
             <summary>
-            ProcurementMedicineQuantity
+            Property representing the quanity of the procurement medicine
             </summary>
         </member>
         <member name="T:ConsoleApp1.Models.Narudzbenica">
             <summary>
-            Class used for the model representing
+            Class used for the model representing the order
             </summary>
         </member>
         <member name="M:ConsoleApp1.Models.Narudzbenica.#ctor">
             <summary>
-            Constructor of class
+            Constructor of class order
             </summary>
         </member>
         <member name="F:ConsoleApp1.Models.Narudzbenica.SifraNarudzbine">
             <summary>
-            OrderID
+            Property representing the Unique ID of the order
             </summary>
         </member>
         <member name="F:ConsoleApp1.Models.Narudzbenica.Vreme">
             <summary>
-            OrderTime
+            Property representing the time of the order
             </summary>
         </member>
         <member name="F:ConsoleApp1.Models.Narudzbenica.Apotekar">
             <summary>
-            UniqueApothecary
+            Property representing the apotechary of the order
             </summary>
         </member>
         <member name="F:ConsoleApp1.Models.Narudzbenica.ListaNabavke">
             <summary>
-            OrderList
+            Property representing the order list of the order
             </summary>
         </member>
     </members>
