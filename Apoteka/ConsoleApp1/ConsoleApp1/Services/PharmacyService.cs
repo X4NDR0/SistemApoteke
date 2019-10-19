@@ -87,7 +87,7 @@ namespace ConsoleApp1.Services
             int brisanjeSelect;
 
             Console.Write("Unesite sifru narudzbine koju zelite da obrisete:");
-            brisanjeSelect = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(),out brisanjeSelect);
 
             bool success = CheckOrderID(brisanjeSelect);
 
@@ -165,9 +165,9 @@ namespace ConsoleApp1.Services
             int sifraLeka;
 
             Console.Write("Unesite sifru leka koji zelite da ispisete:");
-            sifraLeka = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out sifraLeka);
 
-            bool success = CheckAndChangeMedicine(sifraLeka);
+            bool success = CheckMedicineID(sifraLeka);
 
             if (success)
             {
@@ -191,9 +191,9 @@ namespace ConsoleApp1.Services
             int sifraLekaBrisanje;
 
             Console.Write("Unesite sifru leka kojeg zelite da obrisete:");
-            sifraLekaBrisanje = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out sifraLekaBrisanje);
 
-            bool success = CheckAndChangeMedicine(sifraLekaBrisanje);
+            bool success = CheckMedicineID(sifraLekaBrisanje);
 
             if (success)
             {
@@ -213,7 +213,7 @@ namespace ConsoleApp1.Services
 
         }
 
-        private bool CheckAndChangeMedicine(int lekID)
+        private bool CheckMedicineID(int lekID)
         {
             foreach (Lek lek in listaLekova)
             {
@@ -233,17 +233,17 @@ namespace ConsoleApp1.Services
             int sifraLekaIzmena;
 
             Console.Write("Unesite sifru leka kojeg zelite da izmenite:");
-            sifraLekaIzmena = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out sifraLekaIzmena);
 
-            bool success = CheckAndChangeMedicine(sifraLekaIzmena);
+            bool success = CheckMedicineID(sifraLekaIzmena);
 
             if (success)
             {
                 Console.Write("Unesite novu sifru leka:");
-                novaSifraLeka = Convert.ToInt32(Console.ReadLine());
+                Int32.TryParse(Console.ReadLine(), out novaSifraLeka);
 
                 Console.Write("Unesite novi naziv leka:");
-                noviNazivLeka = Console.ReadLine();
+                Int32.TryParse(Console.ReadLine(), out noviNazivLeka);
 
                 Lek lekEdit = new Lek { SifraLeka = novaSifraLeka, NazivLeka = noviNazivLeka };
 
@@ -267,9 +267,9 @@ namespace ConsoleApp1.Services
             string addNazivLeka;
 
             Console.Write("Unesite sifru leka:");
-            addSifraLeka = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out addSifraLeka);
 
-            bool success = CheckAndChangeMedicine(addSifraLeka);
+            bool success = CheckMedicineID(addSifraLeka);
 
             if (success)
             {
@@ -299,15 +299,15 @@ namespace ConsoleApp1.Services
             int noviBrojTelefonaApotekara;
 
             Console.Write("Unesite sifru apotekara za izmenu:");
-            sifraApotekaraZaIzmenu = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out sifraApotekaraZaIzmenu);
 
-            bool success = CheckAndChangePharmacyst(sifraApotekaraZaIzmenu);
+            bool success = CheckPharmacystID(sifraApotekaraZaIzmenu);
 
             if (success)
             {
 
                 Console.Write("Unesite novu sifru apotekara:");
-                novaSifraApotekara = Convert.ToInt32(Console.ReadLine());
+                Int32.TryParse(Console.ReadLine(), out novaSifraApotekara);
 
                 Console.Write("Unesite novo ime apotekara:");
                 novoImeApotekara = Console.ReadLine();
@@ -333,7 +333,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        private bool CheckAndChangePharmacyst(int pharmacystID)
+        private bool CheckPharmacystID(int pharmacystID)
         {
             foreach (Apotekar apotekar in listaApotekara)
             {
@@ -353,9 +353,9 @@ namespace ConsoleApp1.Services
             int sifraApotekaraZaBrisanje;
 
             Console.Write("Unesite sifru apotekara kojeg zelite da obrisete:");
-            sifraApotekaraZaBrisanje = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out sifraApotekaraZaBrisanje);
 
-            bool success = CheckAndChangePharmacyst(sifraApotekaraZaBrisanje);
+            bool success = CheckPharmacystID(sifraApotekaraZaBrisanje);
 
             if (success)
             {
@@ -385,9 +385,9 @@ namespace ConsoleApp1.Services
             int noviBrojTelefonaApotekara;
 
             Console.Write("Unesite id apotekara:");
-            noviIdApotekara = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out noviIdApotekara);
 
-            bool success = CheckAndChangePharmacyst(noviIdApotekara);
+            bool success = CheckPharmacystID(noviIdApotekara);
             if (success)
             {
                 Console.WriteLine("Apotekar sa tim ID-om vec postoji!");
@@ -487,11 +487,11 @@ namespace ConsoleApp1.Services
             int sifraNarudzbine;
 
             Console.Write("Unesite sifru narudzbine:");
-            sifraNarudzbine = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out sifraNarudzbine);
 
             IspisiSveApotekare();
             Console.Write("Unesite sifru apotekara koji vrsi narudzbenicu:");
-            sifraApotekara = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out sifraApotekara);
 
             foreach (Apotekar apotekar in listaApotekara)
             {
@@ -504,7 +504,7 @@ namespace ConsoleApp1.Services
             IspisiSveDobavljace();
 
             Console.Write("Unesite sifru dobavljaca:");
-            sifraDobavljaca = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out sifraDobavljaca);
 
             foreach (Dobavljac dobavljac in listaDobavljaca)
             {
@@ -516,14 +516,14 @@ namespace ConsoleApp1.Services
 
             IspisiSveLekove();
             Console.Write("Unesite sifru leka:");
-            sifraLeka = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out sifraLeka);
 
             foreach (Lek lek in listaLekova)
             {
                 if (lek.SifraLeka == sifraLeka)
                 {
                     Console.Write("Unesite kolicinu leka:");
-                    kolicinaLeka = Convert.ToInt32(Console.ReadLine());
+                    Int32.TryParse(Console.ReadLine(), out kolicinaLeka);
                     ukupnaCena += lek.Cena * kolicinaLeka;
                     NabavkaLeka nabavkaLekaKreiranje = new NabavkaLeka { Naziv = lek.NazivLeka, Cena = lek.Cena, Kolicina = kolicinaLeka, UkupnaCena = ukupnaCena };
                     Narudzbenica narudzbenicaKreiraj = new Narudzbenica { Apotekar = apotekarKreiraj, ListaNabavke = listaNabavkeLeka, Vreme = DateTime.Now, SifraNarudzbine = sifraNarudzbine };
@@ -556,14 +556,14 @@ namespace ConsoleApp1.Services
 
             int izabirDobavljacaZaIzmenu;
             Console.Write("Unesite sifru dobavljaca kojeg zelite da izmenite:");
-            izabirDobavljacaZaIzmenu = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out izabirDobavljacaZaIzmenu);
 
-            bool success = CheckAndChangeDobavljaca(izabirDobavljacaZaIzmenu);
+            bool success = CheckDobavljacID(izabirDobavljacaZaIzmenu);
 
             if (success)
             {
                 Console.Write("Unesite novu sifru dobavljaca:");
-                novaSifraDobavljaca = Convert.ToInt32(Console.ReadLine());
+                Int32.TryParse(Console.ReadLine(), out novaSifraDobavljaca);
 
                 Console.Write("Unesite novo ime dobavljaca:");
                 novoImeDobavljaca = Console.ReadLine();
@@ -578,7 +578,7 @@ namespace ConsoleApp1.Services
                 novoMestoDobavljaca = Console.ReadLine();
 
                 Console.Write("Unesite novi broj telefona dobavljaca");
-                noviBrojTelefonDobavljaca = Convert.ToInt32(Console.ReadLine());
+                Int32.TryParse(Console.ReadLine(), out noviBrojTelefonDobavljaca);
             }
             else
             {
@@ -586,7 +586,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        private bool CheckAndChangeDobavljaca(int dobavljacID)
+        private bool CheckDobavljacID(int dobavljacID)
         {
             foreach (Dobavljac dobavljac in listaDobavljaca)
             {
@@ -605,9 +605,9 @@ namespace ConsoleApp1.Services
             int izabirDobavljacaZaBrisanje;
 
             Console.Write("Unesite sifru dobavljaca kojeg zelite da obrisete:");
-            izabirDobavljacaZaBrisanje = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out izabirDobavljacaZaBrisanje);
 
-            bool success = CheckAndChangeDobavljaca(izabirDobavljacaZaBrisanje);
+            bool success = CheckDobavljacID(izabirDobavljacaZaBrisanje);
 
             if (success)
             {
@@ -639,9 +639,9 @@ namespace ConsoleApp1.Services
             int addBrojTelefona;
 
             Console.Write("Unesite ID dobavljaca:");
-            addIdDobavljaca = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out addIdDobavljaca);
 
-            bool success = CheckAndChangeDobavljaca(addIdDobavljaca);
+            bool success = CheckDobavljacID(addIdDobavljaca);
 
             if (success)
             {
@@ -662,7 +662,7 @@ namespace ConsoleApp1.Services
                 addMesto = Console.ReadLine();
 
                 Console.Write("Unesite broj telefona dobavljaca:");
-                addBrojTelefona = Convert.ToInt32(Console.ReadLine());
+                Int32.TryParse(Console.ReadLine(), out addBrojTelefona); ;
 
                 Dobavljac dobavljacAdd = new Dobavljac { IdentifikacioniBroj = addIdDobavljaca, Ime = addIme, Prezime = addPrezime, Adresa = addAdresa, Mesto = addMesto, BrojTelefona = addBrojTelefona };
 
@@ -682,7 +682,7 @@ namespace ConsoleApp1.Services
             Console.WriteLine("5.Dodaj lek");
             Console.Write("Unos:");
 
-            izabir = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out izabir);
 
             switch (izabir)
             {
@@ -722,7 +722,7 @@ namespace ConsoleApp1.Services
             Console.WriteLine("4.Dodaj dobavljaca");
             Console.Write("Unos:");
 
-            izabir = Convert.ToInt32(Console.ReadLine());
+            Int32.TryParse(Console.ReadLine(), out izabir);
 
             switch (izabir)
             {
