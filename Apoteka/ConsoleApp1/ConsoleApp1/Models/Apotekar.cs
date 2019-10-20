@@ -10,12 +10,10 @@
         /// </summary>
         public int IdentifikacioniBroj;
 
-
         /// <summary>
         /// Property representing the name of the pharmacist.
         /// </summary>
         public string Ime;
-
 
         /// <summary>
         /// Property representing the last name of the pharmacist.

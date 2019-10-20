@@ -96,7 +96,7 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru narudzbine koju zelite da obrisete:");
             Int32.TryParse(Console.ReadLine(), out brisanjeSelect);
 
-            Narudzbenica pronadjenaNarudzbenica = CheckOrderID(brisanjeSelect);
+            Narudzbenica pronadjenaNarudzbenica = FindOrderByID(brisanjeSelect);
 
             if (pronadjenaNarudzbenica != null)
             {
@@ -108,7 +108,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        private Narudzbenica CheckOrderID(int orderID)
+        private Narudzbenica FindOrderByID(int orderID)
         {
             foreach (Narudzbenica narudzbenica in listaNarudzbenica)
             {
@@ -130,14 +130,26 @@ namespace ConsoleApp1.Services
             Console.Write("Unos:");
         }
 
+        //private void IspisiSveNarudzbine()
+        //{
+        //    for (int i = 0; i < listaNarudzbenica.Count; i++)
+        //    {
+        //        Console.WriteLine("Sifra:" + listaNarudzbenica[i].SifraNarudzbine + "\n" + "Apotekar:" + listaNarudzbenica[i].Apotekar.Ime + " " + listaNarudzbenica[i].Apotekar.Prezime + "\n" + "Vreme:" + listaNarudzbenica[i].Vreme);
+        //        for (int j = 0; j < listaNarudzbenica[i].ListaNabavke.Count; j++)
+        //        {
+        //            Console.WriteLine(listaNarudzbenica[i].ListaNabavke[j].Naziv + " " + listaNarudzbenica[i].ListaNabavke[j].Kolicina);
+        //        }
+        //    }
+        //}
+
         private void IspisiSveNarudzbine()
         {
-            for (int i = 0; i < listaNarudzbenica.Count; i++)
+            foreach (Narudzbenica narudzbenica in listaNarudzbenica)
             {
-                Console.WriteLine("Sifra:" + listaNarudzbenica[i].SifraNarudzbine + "\n" + "Apotekar:" + listaNarudzbenica[i].Apotekar.Ime + " " + listaNarudzbenica[i].Apotekar.Prezime + "\n" + "Vreme:" + listaNarudzbenica[i].Vreme);
-                for (int j = 0; j < listaNarudzbenica[i].ListaNabavke.Count; j++)
+                Console.WriteLine("Sifra:" + narudzbenica.SifraNarudzbine + "\n" + "Apotekar:" + narudzbenica.Apotekar.Ime + " " + narudzbenica.Apotekar.Prezime + "\n" + "Vreme:" + narudzbenica.Vreme);
+                foreach (NabavkaLeka nabavkaLeka in narudzbenica.ListaNabavke)
                 {
-                    Console.WriteLine(listaNarudzbenica[i].ListaNabavke[j].Naziv + " " + listaNarudzbenica[i].ListaNabavke[j].Kolicina);
+                    Console.WriteLine(nabavkaLeka.Naziv + " " + nabavkaLeka.Kolicina);
                 }
             }
         }
@@ -170,13 +182,21 @@ namespace ConsoleApp1.Services
 
             if (pronadjenLek != null)
             {
-                foreach (Lek lek in listaLekova)
-                {
-                    if (lek.SifraLeka == sifraLeka)
-                    {
-                        Console.WriteLine(lek.SifraLeka + " " + lek.NazivLeka + " " + lek.Cena);
-                    }
-                }
+                //foreach (Lek lek in listaLekova)
+                //{
+                //    if (lek.SifraLeka == sifraLeka)
+                //    {
+                //        Console.WriteLine(lek.SifraLeka + " " + lek.NazivLeka + " " + lek.Cena);
+                //    }
+                //}
+
+
+
+                //Console.WriteLine(pronadjenLek.SifraLeka + " " + pronadjenLek.NazivLeka + " " + pronadjenLek.Cena);
+
+                //umesto ovog nachina pisanja, koristi ovo 
+
+                Console.WriteLine($"{pronadjenLek.SifraLeka} {pronadjenLek.NazivLeka} {pronadjenLek.Cena}");
             }
             else
             {
@@ -195,13 +215,16 @@ namespace ConsoleApp1.Services
 
             if (pronadjenLek != null)
             {
-                for (int i = 0; i < listaLekova.Count; i++)
-                {
-                    if (listaLekova[i].SifraLeka == sifraLekaBrisanje)
-                    {
-                        listaLekova.RemoveAt(i);
-                    }
-                }
+                //for (int i = 0; i < listaLekova.Count; i++)
+                //{
+                //    if (listaLekova[i].SifraLeka == sifraLekaBrisanje)
+                //    {
+                //        listaLekova.RemoveAt(i);
+                //    }
+                //}
+
+                listaLekova.Remove(pronadjenLek);
+
                 Console.WriteLine("Uspesno ste obrisali lek!");
             }
             else
@@ -244,13 +267,18 @@ namespace ConsoleApp1.Services
 
                 Lek lekEdit = new Lek { SifraLeka = novaSifraLeka, NazivLeka = noviNazivLeka };
 
-                foreach (Lek lek in listaLekova)
-                {
-                    if (lek.SifraLeka == sifraLekaIzmena)
-                    {
-                        lekEdit = lek;
-                    }
-                }
+                //foreach (Lek lek in listaLekova)
+                //{
+                //    if (lek.SifraLeka == sifraLekaIzmena)
+                //    {
+                //        lekEdit = lek;
+                //    }
+                //}
+
+                //Ovde gore, em si opet uradio bespotrebno foreach, em si sa starim lekom pregazio novi koji si upravo kreirao.
+                //To znachi da nisi ni proverio da li je izmenio lek....
+
+                pronadjenLek = lekEdit;
             }
             else
             {
@@ -270,7 +298,7 @@ namespace ConsoleApp1.Services
 
             if (pronadjenLek != null)
             {
-                Console.WriteLine("Nemozete koristiti taj ID jer neki drugi lek koristi taj!");
+                Console.WriteLine("Nemozete koristiti taj ID jer neki drugi lek koristi isti!");
             }
             else
             {
@@ -298,7 +326,7 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru apotekara za izmenu:");
             Int32.TryParse(Console.ReadLine(), out sifraApotekaraZaIzmenu);
 
-            Apotekar pronadjenApotekar = CheckPharmacystID(sifraApotekaraZaIzmenu);
+            Apotekar pronadjenApotekar = FindPharmacystByID(sifraApotekaraZaIzmenu);
 
             if (pronadjenApotekar != null)
             {
@@ -314,14 +342,16 @@ namespace ConsoleApp1.Services
                 Console.Write("Unesite novi broj telefona apotekara:");
                 noviBrojTelefonaApotekara = Convert.ToInt32(Console.ReadLine());
 
-                for (int i = 0; i < listaApotekara.Count; i++)
-                {
-                    if (listaApotekara[i].IdentifikacioniBroj == sifraApotekaraZaIzmenu)
-                    {
-                        Apotekar apotekarIzmena = new Apotekar { IdentifikacioniBroj = novaSifraApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara, BrojTelefona = noviBrojTelefonaApotekara };
-                        listaApotekara[i] = apotekarIzmena;
-                    }
-                }
+                //for (int i = 0; i < listaApotekara.Count; i++)
+                //{
+                //    if (listaApotekara[i].IdentifikacioniBroj == sifraApotekaraZaIzmenu)
+                //    {
+                //        Apotekar apotekarIzmena = new Apotekar { IdentifikacioniBroj = novaSifraApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara, BrojTelefona = noviBrojTelefonaApotekara };
+                //        listaApotekara[i] = apotekarIzmena;
+                //    }
+                //}
+                Apotekar apotekarIzmena = new Apotekar { IdentifikacioniBroj = novaSifraApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara, BrojTelefona = noviBrojTelefonaApotekara };
+                pronadjenApotekar = apotekarIzmena;
             }
             else
             {
@@ -329,7 +359,7 @@ namespace ConsoleApp1.Services
             }
         }
 
-        private Apotekar CheckPharmacystID(int pharmacystID)
+        private Apotekar FindPharmacystByID(int pharmacystID)
         {
             foreach (Apotekar apotekar in listaApotekara)
             {
@@ -341,8 +371,6 @@ namespace ConsoleApp1.Services
             return null;
         }
 
-
-
         private void ObrisiApotekara()
         {
             Console.Clear();
@@ -351,17 +379,20 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru apotekara kojeg zelite da obrisete:");
             Int32.TryParse(Console.ReadLine(), out sifraApotekaraZaBrisanje);
 
-            Apotekar pronadjenApotekar = CheckPharmacystID(sifraApotekaraZaBrisanje);
+            Apotekar pronadjenApotekar = FindPharmacystByID(sifraApotekaraZaBrisanje);
 
             if (pronadjenApotekar != null)
             {
-                for (int i = 0; i < listaApotekara.Count; i++)
-                {
-                    if (listaApotekara[i].IdentifikacioniBroj == sifraApotekaraZaBrisanje)
-                    {
-                        listaApotekara.RemoveAt(i);
-                    }
-                }
+                //for (int i = 0; i < listaApotekara.Count; i++)
+                //{
+                //    if (listaApotekara[i].IdentifikacioniBroj == sifraApotekaraZaBrisanje)
+                //    {
+                //        listaApotekara.RemoveAt(i);
+                //    }
+                //}
+
+                listaApotekara.Remove(pronadjenApotekar);
+
                 Console.WriteLine("Uspesno ste obrisali apotekara!");
             }
             else
@@ -382,7 +413,7 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite id apotekara:");
             Int32.TryParse(Console.ReadLine(), out noviIdApotekara);
 
-            Apotekar pronadjenApotekar = CheckPharmacystID(noviIdApotekara);
+            Apotekar pronadjenApotekar = FindPharmacystByID(noviIdApotekara);
             if (pronadjenApotekar != null)
             {
                 Console.WriteLine("Apotekar sa tim ID-om vec postoji!");
@@ -470,8 +501,8 @@ namespace ConsoleApp1.Services
 
         private void KreirajNarudzbenicu()
         {
-            Dobavljac dobavljacKreiranje = new Dobavljac();
-            Apotekar apotekarKreiraj = new Apotekar();
+            // Dobavljac dobavljacKreiranje = new Dobavljac();
+            //  Apotekar apotekarKreiraj = new Apotekar();
 
             //Promenljive
             int sifraDobavljaca;
@@ -488,30 +519,36 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru apotekara koji vrsi narudzbenicu:");
             Int32.TryParse(Console.ReadLine(), out sifraApotekara);
 
-            foreach (Apotekar apotekar in listaApotekara)
-            {
-                if (apotekar.IdentifikacioniBroj == sifraApotekara)
-                {
-                    apotekarKreiraj = apotekar;
-                }
-            }
+            //foreach (Apotekar apotekar in listaApotekara)
+            //{
+            //    if (apotekar.IdentifikacioniBroj == sifraApotekara)
+            //    {
+            //        apotekarKreiraj = apotekar;
+            //    }
+            //}
+
+            Apotekar pronadjeniApotekar = FindPharmacystByID(sifraApotekara);
 
             IspisiSveDobavljace();
 
             Console.Write("Unesite sifru dobavljaca:");
             Int32.TryParse(Console.ReadLine(), out sifraDobavljaca);
 
-            foreach (Dobavljac dobavljac in listaDobavljaca)
-            {
-                if (dobavljac.IdentifikacioniBroj == sifraDobavljaca)
-                {
-                    dobavljacKreiranje = dobavljac;
-                }
-            }
+            //foreach (Dobavljac dobavljac in listaDobavljaca)
+            //{
+            //    if (dobavljac.IdentifikacioniBroj == sifraDobavljaca)
+            //    {
+            //        dobavljacKreiranje = dobavljac;
+            //    }
+            //}
+
+            Dobavljac pronadjeniDobavljac = FindDobavljacByID(sifraDobavljaca);    //   <-----Ovo nisi nigde iskoristio, zato sto nisi dodao dobavljacha u klasu NabavkaLeka;
 
             IspisiSveLekove();
             Console.Write("Unesite sifru leka:");
             Int32.TryParse(Console.ReadLine(), out sifraLeka);
+
+            //Ova ne valja. Na narudzbenicu moze da se doda samo 1 lek. Napravi tako da moze korisnik, odnosno apotekar da doda koliko hoce lekova, i da moze da prekine kada zeli
 
             foreach (Lek lek in listaLekova)
             {
@@ -521,7 +558,7 @@ namespace ConsoleApp1.Services
                     Int32.TryParse(Console.ReadLine(), out kolicinaLeka);
                     ukupnaCena += lek.Cena * kolicinaLeka;
                     NabavkaLeka nabavkaLekaKreiranje = new NabavkaLeka { Naziv = lek.NazivLeka, Cena = lek.Cena, Kolicina = kolicinaLeka, UkupnaCena = ukupnaCena };
-                    Narudzbenica narudzbenicaKreiraj = new Narudzbenica { Apotekar = apotekarKreiraj, ListaNabavke = listaNabavkeLeka, Vreme = DateTime.Now, SifraNarudzbine = sifraNarudzbine };
+                    Narudzbenica narudzbenicaKreiraj = new Narudzbenica { Apotekar = pronadjeniApotekar, ListaNabavke = listaNabavkeLeka, Vreme = DateTime.Now, SifraNarudzbine = sifraNarudzbine };
                     listaNabavkeLeka.Add(nabavkaLekaKreiranje);
                     listaNarudzbenica.Add(narudzbenicaKreiraj);
                 }
@@ -553,9 +590,11 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru dobavljaca kojeg zelite da izmenite:");
             Int32.TryParse(Console.ReadLine(), out izabirDobavljacaZaIzmenu);
 
-            bool success = CheckDobavljacID(izabirDobavljacaZaIzmenu);
+            //bool success = FindDobavljacByID(izabirDobavljacaZaIzmenu);
 
-            if (success)
+            Dobavljac pronadjeniDobavljac = FindDobavljacByID(izabirDobavljacaZaIzmenu);
+
+            if (pronadjeniDobavljac != null)
             {
                 Console.Write("Unesite novu sifru dobavljaca:");
                 Int32.TryParse(Console.ReadLine(), out novaSifraDobavljaca);
@@ -581,16 +620,28 @@ namespace ConsoleApp1.Services
             }
         }
 
-        private bool CheckDobavljacID(int dobavljacID)
+        //private bool FindDobavljacByID(int dobavljacID)
+        //{
+        //    foreach (Dobavljac dobavljac in listaDobavljaca)
+        //    {
+        //        if (dobavljac.IdentifikacioniBroj == dobavljacID)
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
+
+        private Dobavljac FindDobavljacByID(int dobavljacID)
         {
             foreach (Dobavljac dobavljac in listaDobavljaca)
             {
                 if (dobavljac.IdentifikacioniBroj == dobavljacID)
                 {
-                    return true;
+                    return dobavljac;
                 }
             }
-            return false;
+            return null;
         }
 
         private void ObrisiDobavljaca()
@@ -601,17 +652,21 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru dobavljaca kojeg zelite da obrisete:");
             Int32.TryParse(Console.ReadLine(), out izabirDobavljacaZaBrisanje);
 
-            bool success = CheckDobavljacID(izabirDobavljacaZaBrisanje);
+            //bool success = FindDobavljacByID(izabirDobavljacaZaBrisanje);
 
-            if (success)
+            Dobavljac pronadjeniDobavljac = FindDobavljacByID(izabirDobavljacaZaBrisanje);
+
+            if (pronadjeniDobavljac != null)
             {
-                foreach (Dobavljac dobavljac in listaDobavljaca)
-                {
-                    if (dobavljac.IdentifikacioniBroj == izabirDobavljacaZaBrisanje)
-                    {
-                        listaDobavljaca.Remove(dobavljac);
-                    }
-                }
+                //foreach (Dobavljac dobavljac in listaDobavljaca)
+                //{
+                //    if (dobavljac.IdentifikacioniBroj == izabirDobavljacaZaBrisanje)
+                //    {
+                //        listaDobavljaca.Remove(dobavljac);
+                //    }
+                //}
+
+                listaDobavljaca.Remove(pronadjeniDobavljac);
 
                 Console.WriteLine("Uspesno ste obrisali dobavljaca!");
             }
@@ -633,9 +688,11 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite ID dobavljaca:");
             Int32.TryParse(Console.ReadLine(), out addIdDobavljaca);
 
-            bool success = CheckDobavljacID(addIdDobavljaca);
+            //bool success = FindDobavljacByID(addIdDobavljaca);
 
-            if (success)
+            Dobavljac pronadjeniDobavljac = FindDobavljacByID(addIdDobavljaca);
+
+            if (pronadjeniDobavljac != null)
             {
                 Console.WriteLine("Nemozete uneti taj id jer neki drugi dobavljac koristi taj!");
             }
