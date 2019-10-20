@@ -178,7 +178,7 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka koji zelite da ispisete:");
             Int32.TryParse(Console.ReadLine(), out sifraLeka);
 
-            Lek pronadjenLek = CheckMedicineID(sifraLeka);
+            Lek pronadjenLek = FindMedicineByID(sifraLeka);
 
             if (pronadjenLek != null)
             {
@@ -211,7 +211,7 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka kojeg zelite da obrisete:");
             Int32.TryParse(Console.ReadLine(), out sifraLekaBrisanje);
 
-            Lek pronadjenLek = CheckMedicineID(sifraLekaBrisanje);
+            Lek pronadjenLek = FindMedicineByID(sifraLekaBrisanje);
 
             if (pronadjenLek != null)
             {
@@ -234,7 +234,7 @@ namespace ConsoleApp1.Services
 
         }
 
-        private Lek CheckMedicineID(int lekID)
+        private Lek FindMedicineByID(int lekID)
         {
             foreach (Lek lek in listaLekova)
             {
@@ -255,7 +255,7 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka kojeg zelite da izmenite:");
             Int32.TryParse(Console.ReadLine(), out sifraLekaIzmena);
 
-            Lek pronadjenLek = CheckMedicineID(sifraLekaIzmena);
+            Lek pronadjenLek = FindMedicineByID(sifraLekaIzmena);
 
             if (pronadjenLek != null)
             {
@@ -294,7 +294,7 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru leka:");
             Int32.TryParse(Console.ReadLine(), out addSifraLeka);
 
-            Lek pronadjenLek = CheckMedicineID(addSifraLeka);
+            Lek pronadjenLek = FindMedicineByID(addSifraLeka);
 
             if (pronadjenLek != null)
             {
