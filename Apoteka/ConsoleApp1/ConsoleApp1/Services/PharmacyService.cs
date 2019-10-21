@@ -1,6 +1,7 @@
 ﻿using ConsoleApp1.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Zadatak2SistemApoteke;
 
 namespace ConsoleApp1.Services
@@ -278,7 +279,9 @@ namespace ConsoleApp1.Services
                 //Ovde gore, em si opet uradio bespotrebno foreach, em si sa starim lekom pregazio novi koji si upravo kreirao.
                 //To znachi da nisi ni proverio da li je izmenio lek....
 
-                pronadjenLek = lekEdit;
+                var indexPronadjenogLeka = listaLekova.IndexOf(pronadjenLek);
+
+                listaLekova[indexPronadjenogLeka] = lekEdit;
             }
             else
             {
@@ -351,7 +354,13 @@ namespace ConsoleApp1.Services
                 //    }
                 //}
                 Apotekar apotekarIzmena = new Apotekar { IdentifikacioniBroj = novaSifraApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara, BrojTelefona = noviBrojTelefonaApotekara };
-                pronadjenApotekar = apotekarIzmena;
+
+                listaApotekara[listaApotekara.IndexOf(pronadjenApotekar)] = apotekarIzmena;
+
+                //mozesh i odvojeno
+
+                //int indexObjekta = listaApotekara.IndexOf(pronadjenApotekar);
+                //listaApotekara[indexObjekta] = apotekarIzmena;
             }
             else
             {
@@ -613,6 +622,8 @@ namespace ConsoleApp1.Services
 
                 Console.Write("Unesite novi broj telefona dobavljaca");
                 Int32.TryParse(Console.ReadLine(), out noviBrojTelefonDobavljaca);
+
+                //!!!!! Ova metoda ne radi nista, zavrshi je!.
             }
             else
             {
