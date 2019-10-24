@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zadatak2SistemApoteke;
-using ConsoleApp1.Helper;
+using ConsoleApp1.Utilies;
 
 namespace ConsoleApp1.Services
 {
@@ -21,6 +21,7 @@ namespace ConsoleApp1.Services
         /// <summary>
         /// Used to run the main service method.
         /// </summary>
+
         public void Initialize()
         {
             LoadData();
@@ -96,7 +97,7 @@ namespace ConsoleApp1.Services
             int brisanjeSelect;
 
             Console.Write("Unesite sifru narudzbine koju zelite da obrisete:");
-            brisanjeSelect = helper.proveriIntBroj();
+            brisanjeSelect = Helper.ProveriIntBroj();
 
             Narudzbenica pronadjenaNarudzbenica = listaNarudzbenica.Where(x => x.SifraNarudzbine == brisanjeSelect).First();
 
@@ -155,7 +156,7 @@ namespace ConsoleApp1.Services
             int sifraLeka;
 
             Console.Write("Unesite sifru leka kojeg zelite ispisati:");
-            sifraLeka = helper.proveriIntBroj();
+            sifraLeka = Helper.ProveriIntBroj();
 
             Lek pronadjenLek = listaLekova.Where(x => x.SifraLeka == sifraLeka).First();
 
@@ -176,7 +177,7 @@ namespace ConsoleApp1.Services
             int sifraLekaBrisanje;
 
             Console.Write("Unesite sifru leka kojeg zelite da obrisete:");
-            sifraLekaBrisanje = helper.proveriIntBroj();
+            sifraLekaBrisanje = Helper.ProveriIntBroj();
 
             Lek pronadjenLek = listaLekova.Where(x => x.SifraLeka == sifraLekaBrisanje).First();
 
@@ -201,7 +202,7 @@ namespace ConsoleApp1.Services
             double novaCenaLeka;
 
             Console.Write("Unesite sifru leka kojeg zelite da izmenite:");
-            sifraLekaIzmena = helper.proveriIntBroj();
+            sifraLekaIzmena = Helper.ProveriIntBroj();
 
             Lek pronadjenLek = listaLekova.Where(x => x.SifraLeka == sifraLekaIzmena).First();
 
@@ -235,7 +236,7 @@ namespace ConsoleApp1.Services
             double addCenaLeka;
 
             Console.Write("Unesite sifru leka:");
-            addSifraLeka = helper.proveriIntBroj();
+            addSifraLeka = Helper.ProveriIntBroj();
 
 
             Lek pronadjenLek = listaLekova.Where(x => x.SifraLeka == addSifraLeka).First();
@@ -247,11 +248,11 @@ namespace ConsoleApp1.Services
             else
             {
                 Console.Write("Unesite naziv leka:");
-                addNazivLeka = helper.proveriString();
+                addNazivLeka = Helper.ProveriString();
 
 
                 Console.Write("Unesite cenu leka:");
-                addCenaLeka = helper.proveriDoubleBroj();
+                addCenaLeka = Helper.ProveriDoubleBroj();
 
                 Lek lekAdd = new Lek { SifraLeka = addSifraLeka, NazivLeka = addNazivLeka, Cena = addCenaLeka };
 
@@ -272,23 +273,23 @@ namespace ConsoleApp1.Services
             int noviBrojTelefonaApotekara;
 
             Console.Write("Unesite sifru apotekara za izmenu:");
-            sifraApotekaraZaIzmenu = helper.proveriIntBroj();
+            sifraApotekaraZaIzmenu = Helper.ProveriIntBroj();
 
             Apotekar pronadjenApotekar = listaApotekara.Where(x => x.IdentifikacioniBroj == sifraApotekaraZaIzmenu).First();
 
             if (pronadjenApotekar != null)
             {
                 Console.Write("Unesite novu sifru apotekara:");
-                novaSifraApotekara = helper.proveriIntBroj();
+                novaSifraApotekara = Helper.ProveriIntBroj();
 
                 Console.Write("Unesite novo ime apotekara:");
-                novoImeApotekara = helper.proveriString();
+                novoImeApotekara = Helper.ProveriString();
 
                 Console.Write("Unesite novo prezime apotekara:");
-                novoPrezimeApotekara = helper.proveriString();
+                novoPrezimeApotekara = Helper.ProveriString();
 
                 Console.Write("Unesite novi broj telefona apotekara:");
-                noviBrojTelefonaApotekara = helper.proveriIntBroj();
+                noviBrojTelefonaApotekara = Helper.ProveriIntBroj();
 
                 Apotekar apotekarIzmena = new Apotekar { IdentifikacioniBroj = novaSifraApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara, BrojTelefona = noviBrojTelefonaApotekara };
 
@@ -307,7 +308,7 @@ namespace ConsoleApp1.Services
             int sifraApotekaraZaBrisanje;
 
             Console.Write("Unesite sifru apotekara kojeg zelite da obrisete:");
-            sifraApotekaraZaBrisanje = helper.proveriIntBroj();
+            sifraApotekaraZaBrisanje = Helper.ProveriIntBroj();
 
             Apotekar pronadjenApotekar = listaApotekara.Where(x => x.IdentifikacioniBroj == sifraApotekaraZaBrisanje).First();
 
@@ -333,7 +334,7 @@ namespace ConsoleApp1.Services
             int noviBrojTelefonaApotekara;
 
             Console.Write("Unesite id apotekara:");
-            noviIdApotekara = helper.proveriIntBroj();
+            noviIdApotekara = Helper.ProveriIntBroj();
 
             Apotekar pronadjenApotekar = listaApotekara.Where(x => x.IdentifikacioniBroj == noviIdApotekara).First();
             if (pronadjenApotekar != null)
@@ -343,13 +344,13 @@ namespace ConsoleApp1.Services
             else
             {
                 Console.Write("Unesite ime apotekara:");
-                novoImeApotekara = helper.proveriString();
+                novoImeApotekara = Helper.ProveriString();
 
                 Console.Write("Unesite prezime apotekara:");
-                novoPrezimeApotekara = helper.proveriString();
+                novoPrezimeApotekara = Helper.ProveriString();
 
                 Console.Write("Unesite broj telefona apotekara:");
-                noviBrojTelefonaApotekara = helper.proveriIntBroj();
+                noviBrojTelefonaApotekara = Helper.ProveriIntBroj();
 
                 Apotekar apotekarKreiranje = new Apotekar { IdentifikacioniBroj = noviIdApotekara, Ime = novoImeApotekara, Prezime = novoPrezimeApotekara, BrojTelefona = noviBrojTelefonaApotekara };
 
@@ -394,7 +395,7 @@ namespace ConsoleApp1.Services
             Console.WriteLine("4.Dodaj apotekara");
             Console.Write("Unos:");
 
-            izabir = helper.proveriIntBroj();
+            izabir = Helper.ProveriIntBroj();
 
             switch (izabir)
             {
@@ -433,11 +434,11 @@ namespace ConsoleApp1.Services
             int sifraNarudzbine;
 
             Console.Write("Unesite sifru narudzbine:");
-            sifraNarudzbine = helper.proveriIntBroj();
+            sifraNarudzbine = Helper.ProveriIntBroj();
 
             IspisiSveApotekare();
             Console.Write("Unesite sifru apotekara koji vrsi narudzbenicu:");
-            sifraApotekara = helper.proveriIntBroj();
+            sifraApotekara = Helper.ProveriIntBroj();
 
 
             Apotekar pronadjeniApotekar = listaApotekara.Where(x => x.IdentifikacioniBroj == sifraNarudzbine).First();
@@ -445,14 +446,14 @@ namespace ConsoleApp1.Services
             IspisiSveDobavljace();
 
             Console.Write("Unesite sifru dobavljaca:");
-            sifraDobavljaca = helper.proveriIntBroj();
+            sifraDobavljaca = Helper.ProveriIntBroj();
 
 
             Dobavljac pronadjeniDobavljac = listaDobavljaca.Where(x => x.IdentifikacioniBroj == sifraDobavljaca).First();
 
             IspisiSveLekove();
             Console.Write("Unesite sifru leka:");
-            sifraLeka = helper.proveriIntBroj();
+            sifraLeka = Helper.ProveriIntBroj();
 
 
             foreach (Lek lek in listaLekova)
@@ -460,7 +461,7 @@ namespace ConsoleApp1.Services
                 if (lek.SifraLeka == sifraLeka)
                 {
                     Console.Write("Unesite kolicinu leka:");
-                    kolicinaLeka = helper.proveriIntBroj();
+                    kolicinaLeka = Helper.ProveriIntBroj();
                     ukupnaCena += lek.Cena * kolicinaLeka;
                     NabavkaLeka nabavkaLekaKreiranje = new NabavkaLeka { Naziv = lek.NazivLeka, Cena = lek.Cena, Kolicina = kolicinaLeka, UkupnaCena = ukupnaCena };
                     Narudzbenica narudzbenicaKreiraj = new Narudzbenica { Apotekar = pronadjeniApotekar, ListaNabavke = listaNabavkeLeka, Vreme = DateTime.Now, SifraNarudzbine = sifraNarudzbine };
@@ -493,29 +494,29 @@ namespace ConsoleApp1.Services
 
             int izabirDobavljacaZaIzmenu;
             Console.Write("Unesite sifru dobavljaca kojeg zelite da izmenite:");
-            izabirDobavljacaZaIzmenu = helper.proveriIntBroj();
+            izabirDobavljacaZaIzmenu = Helper.ProveriIntBroj();
 
             Dobavljac pronadjeniDobavljac = listaDobavljaca.Where(x => x.IdentifikacioniBroj == izabirDobavljacaZaIzmenu).First();
 
             if (pronadjeniDobavljac != null)
             {
                 Console.Write("Unesite novu sifru dobavljaca:");
-                novaSifraDobavljaca = helper.proveriIntBroj();
+                novaSifraDobavljaca = Helper.ProveriIntBroj();
 
                 Console.Write("Unesite novo ime dobavljaca:");
-                novoImeDobavljaca = helper.proveriString();
+                novoImeDobavljaca = Helper.ProveriString();
 
                 Console.Write("Unesite novo prezime dobavljaca:");
-                novoPrezimeDobavljaca = helper.proveriString();
+                novoPrezimeDobavljaca = Helper.ProveriString();
 
                 Console.Write("Unesite novu adresu dobavljaca:");
-                novaAdresaDobavljaca = helper.proveriString();
+                novaAdresaDobavljaca = Helper.ProveriString();
 
                 Console.Write("Unesite novo mesto dobavljaca:");
-                novoMestoDobavljaca = helper.proveriString();
+                novoMestoDobavljaca = Helper.ProveriString();
 
                 Console.Write("Unesite novi broj telefona dobavljaca");
-                noviBrojTelefonDobavljaca = helper.proveriIntBroj();
+                noviBrojTelefonDobavljaca = Helper.ProveriIntBroj();
 
                 Dobavljac dobavljacEdit = new Dobavljac { IdentifikacioniBroj = novaSifraDobavljaca, Ime = novoImeDobavljaca, Prezime = novoPrezimeDobavljaca, Mesto = novoMestoDobavljaca, Adresa = novaAdresaDobavljaca, BrojTelefona = noviBrojTelefonDobavljaca };
 
@@ -536,7 +537,7 @@ namespace ConsoleApp1.Services
             int izabirDobavljacaZaBrisanje;
 
             Console.Write("Unesite sifru dobavljaca kojeg zelite da obrisete:");
-            izabirDobavljacaZaBrisanje = helper.proveriIntBroj();
+            izabirDobavljacaZaBrisanje = Helper.ProveriIntBroj();
 
             Dobavljac pronadjeniDobavljac = listaDobavljaca.Where(x => x.IdentifikacioniBroj == izabirDobavljacaZaBrisanje).First();
 
@@ -563,7 +564,7 @@ namespace ConsoleApp1.Services
             int addBrojTelefona;
 
             Console.Write("Unesite ID dobavljaca:");
-            addIdDobavljaca = helper.proveriIntBroj();
+            addIdDobavljaca = Helper.ProveriIntBroj();
 
 
             Dobavljac pronadjeniDobavljac = listaDobavljaca.Where(x => x.IdentifikacioniBroj == addIdDobavljaca).First();
@@ -575,19 +576,19 @@ namespace ConsoleApp1.Services
             else
             {
                 Console.Write("Unesite ime dobavljaca:");
-                addIme = helper.proveriString();
+                addIme = Helper.ProveriString();
 
                 Console.Write("Unesite prezime dobavljaca:");
-                addPrezime = helper.proveriString();
+                addPrezime = Helper.ProveriString();
 
                 Console.Write("Unesite adresu dobavljaca:");
-                addAdresa = helper.proveriString();
+                addAdresa = Helper.ProveriString();
 
                 Console.Write("Unesite mesto dobavljaca:");
-                addMesto = helper.proveriString();
+                addMesto = Helper.ProveriString();
 
                 Console.Write("Unesite broj telefona dobavljaca:");
-                addBrojTelefona = helper.proveriIntBroj();
+                addBrojTelefona = Helper.ProveriIntBroj();
 
                 Dobavljac dobavljacAdd = new Dobavljac { IdentifikacioniBroj = addIdDobavljaca, Ime = addIme, Prezime = addPrezime, Adresa = addAdresa, Mesto = addMesto, BrojTelefona = addBrojTelefona };
 
@@ -607,7 +608,7 @@ namespace ConsoleApp1.Services
             Console.WriteLine("5.Dodaj lek");
             Console.Write("Unos:");
 
-            izabir = helper.proveriIntBroj();
+            izabir = Helper.ProveriIntBroj();
 
             switch (izabir)
             {
@@ -647,7 +648,7 @@ namespace ConsoleApp1.Services
             Console.WriteLine("4.Dodaj dobavljaca");
             Console.Write("Unos:");
 
-            Int32.TryParse(Console.ReadLine(), out izabir);
+            izabir = Helper.ProveriIntBroj();
 
             switch (izabir)
             {
