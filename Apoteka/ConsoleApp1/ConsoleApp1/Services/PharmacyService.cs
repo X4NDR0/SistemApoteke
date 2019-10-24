@@ -1,9 +1,10 @@
-﻿using ConsoleApp1.Models;
+﻿using ConsoleApp1.Enums;
+using ConsoleApp1.Models;
+using ConsoleApp1.Utilies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zadatak2SistemApoteke;
-using ConsoleApp1.Utilies;
 
 namespace ConsoleApp1.Services
 {
@@ -21,7 +22,6 @@ namespace ConsoleApp1.Services
         /// <summary>
         /// Used to run the main service method.
         /// </summary>
-
         public void Initialize()
         {
             LoadData();
@@ -181,7 +181,6 @@ namespace ConsoleApp1.Services
             {
                 Console.WriteLine("Sifra leka koju ste hteli da obrisete ne postoji!");
             }
-
         }
 
         private void IzmeniLek()
@@ -402,7 +401,6 @@ namespace ConsoleApp1.Services
             }
         }
 
-
         private void KreirajNarudzbenicu()
         {
             int sifraDobavljaca;
@@ -425,7 +423,6 @@ namespace ConsoleApp1.Services
 
             Console.Write("Unesite sifru dobavljaca:");
             sifraDobavljaca = Helper.ProveriIntBroj();
-
 
             Dobavljac pronadjeniDobavljac = listaDobavljaca.Where(x => x.IdentifikacioniBroj == sifraDobavljaca).First();
 
@@ -513,7 +510,6 @@ namespace ConsoleApp1.Services
 
             if (pronadjeniDobavljac != null)
             {
-
                 listaDobavljaca.Remove(pronadjeniDobavljac);
 
                 Console.WriteLine("Uspesno ste obrisali dobavljaca!");
@@ -642,15 +638,6 @@ namespace ConsoleApp1.Services
                     Console.WriteLine("Nepoznat unos!");
                     break;
             }
-        }
-
-        private enum Meni
-        {
-            meniApotekara = 1,
-            meniDobavljaca = 2,
-            meniLekova = 3,
-            meniNarudzbina = 4,
-            izlaz = 0
         }
     }
 }
