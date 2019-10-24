@@ -66,7 +66,6 @@ namespace ConsoleApp1.Services
             Console.WriteLine("2.Obrisi narudzbinu");
             Console.WriteLine("3.Kreiraj narudzbinu");
             Console.Write("Unos:");
-
             Int32.TryParse(Console.ReadLine(), out izabirMeni);
 
             switch (izabirMeni)
@@ -94,10 +93,8 @@ namespace ConsoleApp1.Services
 
         private void ObrisiNarudzbenicu()
         {
-            int brisanjeSelect;
-
             Console.Write("Unesite sifru narudzbine koju zelite da obrisete:");
-            brisanjeSelect = Helper.ProveriIntBroj();
+            int brisanjeSelect = Helper.ProveriIntBroj();
 
             Narudzbenica pronadjenaNarudzbenica = listaNarudzbenica.Where(x => x.SifraNarudzbine == brisanjeSelect).First();
 
@@ -120,7 +117,6 @@ namespace ConsoleApp1.Services
             Console.WriteLine("0.Izlaz");
             Console.Write("Unos:");
         }
-
 
         private void IspisiSveNarudzbine()
         {
@@ -153,17 +149,13 @@ namespace ConsoleApp1.Services
 
         private void IspisiLekPoSifri()
         {
-            int sifraLeka;
-
             Console.Write("Unesite sifru leka kojeg zelite ispisati:");
-            sifraLeka = Helper.ProveriIntBroj();
+            int sifraLeka = Helper.ProveriIntBroj();
 
             Lek pronadjenLek = listaLekova.Where(x => x.SifraLeka == sifraLeka).First();
 
             if (pronadjenLek != null)
             {
-                //Console.WriteLine(pronadjenLek.SifraLeka + " " + pronadjenLek.NazivLeka + " " + pronadjenLek.Cena);
-
                 Console.WriteLine($"{pronadjenLek.SifraLeka} {pronadjenLek.NazivLeka} {pronadjenLek.Cena}");
             }
             else
@@ -174,10 +166,8 @@ namespace ConsoleApp1.Services
 
         private void ObrisiLek()
         {
-            int sifraLekaBrisanje;
-
             Console.Write("Unesite sifru leka kojeg zelite da obrisete:");
-            sifraLekaBrisanje = Helper.ProveriIntBroj();
+            int sifraLekaBrisanje = Helper.ProveriIntBroj();
 
             Lek pronadjenLek = listaLekova.Where(x => x.SifraLeka == sifraLekaBrisanje).First();
 
@@ -198,11 +188,10 @@ namespace ConsoleApp1.Services
         {
             int novaSifraLeka;
             string noviNazivLeka;
-            int sifraLekaIzmena;
             double novaCenaLeka;
 
             Console.Write("Unesite sifru leka kojeg zelite da izmenite:");
-            sifraLekaIzmena = Helper.ProveriIntBroj();
+            int sifraLekaIzmena = Helper.ProveriIntBroj();
 
             Lek pronadjenLek = listaLekova.Where(x => x.SifraLeka == sifraLekaIzmena).First();
 
@@ -231,13 +220,11 @@ namespace ConsoleApp1.Services
 
         private void DodajLek()
         {
-            int addSifraLeka;
             string addNazivLeka;
             double addCenaLeka;
 
             Console.Write("Unesite sifru leka:");
-            addSifraLeka = Helper.ProveriIntBroj();
-
+            int addSifraLeka = Helper.ProveriIntBroj();
 
             Lek pronadjenLek = listaLekova.Where(x => x.SifraLeka == addSifraLeka).First();
 
@@ -249,7 +236,6 @@ namespace ConsoleApp1.Services
             {
                 Console.Write("Unesite naziv leka:");
                 addNazivLeka = Helper.ProveriString();
-
 
                 Console.Write("Unesite cenu leka:");
                 addCenaLeka = Helper.ProveriDoubleBroj();
@@ -263,9 +249,6 @@ namespace ConsoleApp1.Services
         private void IzmeniApotekara()
         {
             Console.Clear();
-
-            int sifraApotekaraZaIzmenu;
-
             //Promenljive za izmenu
             int novaSifraApotekara;
             string novoImeApotekara;
@@ -273,7 +256,7 @@ namespace ConsoleApp1.Services
             int noviBrojTelefonaApotekara;
 
             Console.Write("Unesite sifru apotekara za izmenu:");
-            sifraApotekaraZaIzmenu = Helper.ProveriIntBroj();
+            int sifraApotekaraZaIzmenu = Helper.ProveriIntBroj();
 
             Apotekar pronadjenApotekar = listaApotekara.Where(x => x.IdentifikacioniBroj == sifraApotekaraZaIzmenu).First();
 
@@ -386,8 +369,6 @@ namespace ConsoleApp1.Services
 
         private void SistemApotekara()
         {
-            int izabir;
-
             Console.Clear();
             Console.WriteLine("1.Ispisi sve apotekare");
             Console.WriteLine("2.Izmeni odredjenog apotekara");
@@ -395,7 +376,7 @@ namespace ConsoleApp1.Services
             Console.WriteLine("4.Dodaj apotekara");
             Console.Write("Unos:");
 
-            izabir = Helper.ProveriIntBroj();
+            int izabir = Helper.ProveriIntBroj();
 
             switch (izabir)
             {
@@ -420,12 +401,10 @@ namespace ConsoleApp1.Services
                     break;
             }
         }
-        //Kraj metoda apotekara
+
 
         private void KreirajNarudzbenicu()
         {
-
-            //Promenljive
             int sifraDobavljaca;
             int sifraLeka;
             int sifraApotekara;
@@ -440,7 +419,6 @@ namespace ConsoleApp1.Services
             Console.Write("Unesite sifru apotekara koji vrsi narudzbenicu:");
             sifraApotekara = Helper.ProveriIntBroj();
 
-
             Apotekar pronadjeniApotekar = listaApotekara.Where(x => x.IdentifikacioniBroj == sifraNarudzbine).First();
 
             IspisiSveDobavljace();
@@ -454,7 +432,6 @@ namespace ConsoleApp1.Services
             IspisiSveLekove();
             Console.Write("Unesite sifru leka:");
             sifraLeka = Helper.ProveriIntBroj();
-
 
             foreach (Lek lek in listaLekova)
             {
@@ -471,7 +448,6 @@ namespace ConsoleApp1.Services
             }
         }
 
-        //Metode dobavljaca
         private void IspisiSveDobavljace()
         {
             Console.Clear();
@@ -492,9 +468,8 @@ namespace ConsoleApp1.Services
             string novoMestoDobavljaca;
             int noviBrojTelefonDobavljaca;
 
-            int izabirDobavljacaZaIzmenu;
             Console.Write("Unesite sifru dobavljaca kojeg zelite da izmenite:");
-            izabirDobavljacaZaIzmenu = Helper.ProveriIntBroj();
+            int izabirDobavljacaZaIzmenu = Helper.ProveriIntBroj();
 
             Dobavljac pronadjeniDobavljac = listaDobavljaca.Where(x => x.IdentifikacioniBroj == izabirDobavljacaZaIzmenu).First();
 
@@ -521,9 +496,6 @@ namespace ConsoleApp1.Services
                 Dobavljac dobavljacEdit = new Dobavljac { IdentifikacioniBroj = novaSifraDobavljaca, Ime = novoImeDobavljaca, Prezime = novoPrezimeDobavljaca, Mesto = novoMestoDobavljaca, Adresa = novaAdresaDobavljaca, BrojTelefona = noviBrojTelefonDobavljaca };
 
                 listaDobavljaca[listaDobavljaca.IndexOf(pronadjeniDobavljac)] = dobavljacEdit;
-
-
-
             }
             else
             {
@@ -534,10 +506,8 @@ namespace ConsoleApp1.Services
         private void ObrisiDobavljaca()
         {
             Console.Clear();
-            int izabirDobavljacaZaBrisanje;
-
             Console.Write("Unesite sifru dobavljaca kojeg zelite da obrisete:");
-            izabirDobavljacaZaBrisanje = Helper.ProveriIntBroj();
+            int izabirDobavljacaZaBrisanje = Helper.ProveriIntBroj();
 
             Dobavljac pronadjeniDobavljac = listaDobavljaca.Where(x => x.IdentifikacioniBroj == izabirDobavljacaZaBrisanje).First();
 
@@ -565,7 +535,6 @@ namespace ConsoleApp1.Services
 
             Console.Write("Unesite ID dobavljaca:");
             addIdDobavljaca = Helper.ProveriIntBroj();
-
 
             Dobavljac pronadjeniDobavljac = listaDobavljaca.Where(x => x.IdentifikacioniBroj == addIdDobavljaca).First();
 
@@ -598,8 +567,6 @@ namespace ConsoleApp1.Services
 
         private void MeniLekova()
         {
-            int izabir;
-
             Console.Clear();
             Console.WriteLine("1.Ispisi sve lekove");
             Console.WriteLine("2.Ispisi lek po sifri");
@@ -608,7 +575,7 @@ namespace ConsoleApp1.Services
             Console.WriteLine("5.Dodaj lek");
             Console.Write("Unos:");
 
-            izabir = Helper.ProveriIntBroj();
+            int izabir = Helper.ProveriIntBroj();
 
             switch (izabir)
             {
@@ -637,10 +604,9 @@ namespace ConsoleApp1.Services
                     break;
             }
         }
+
         private void MeniDobavljaca()
         {
-            int izabir;
-
             Console.Clear();
             Console.WriteLine("1.Ispisi sve dobavljace");
             Console.WriteLine("2.Izmeni odredjenog dobavljaca");
@@ -648,7 +614,7 @@ namespace ConsoleApp1.Services
             Console.WriteLine("4.Dodaj dobavljaca");
             Console.Write("Unos:");
 
-            izabir = Helper.ProveriIntBroj();
+            int izabir = Helper.ProveriIntBroj();
 
             switch (izabir)
             {

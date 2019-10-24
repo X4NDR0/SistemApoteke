@@ -17,7 +17,6 @@ namespace ConsoleApp1.Utilies
             return broj;
         }
 
-
         public static double ProveriDoubleBroj()
         {
             double broj;
@@ -27,7 +26,6 @@ namespace ConsoleApp1.Utilies
             }
             return broj;
         }
-
 
         public static string ProveriString()
         {
